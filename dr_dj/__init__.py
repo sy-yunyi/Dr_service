@@ -1,0 +1,10 @@
+'''
+@Descripttion: 
+@version: 
+@Author: Six
+@Date: 2020-01-05 11:46:15
+@LastEditors  : Six
+@LastEditTime : 2020-01-05 20:10:02
+'''
+import pymysql
+pymysql.install_as_MySQLdb()
