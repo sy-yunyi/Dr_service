@@ -4,7 +4,7 @@
 @Author: Six
 @Date: 2020-01-05 17:24:43
 @LastEditors  : Six
-@LastEditTime : 2020-03-09 16:09:42
+@LastEditTime : 2020-03-09 16:27:29
 '''
 from django.shortcuts import render
 from django.views import View
@@ -25,10 +25,11 @@ def get_info_for_subject(request):
         sub_info = CCFInfo.objects.filter(subject=sub)
         print(sub_info)
         response["list"] = json.loads(serializers.serialize("json",sub_info))
-        response["msg"] = "success"
+        response["msg"] = "返回ccf列表数据成功"
+        response["ret"] = 1
     except Exception as e:
         response["msg"] = str(e)
-        response["err"] = 1
+        response["ret"] = 0
     return JsonResponse(response)
 
 @require_http_methods(["GET"])
