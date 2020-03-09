@@ -4,7 +4,7 @@
 @Author: Six
 @Date: 2020-01-05 17:24:43
 @LastEditors  : Six
-@LastEditTime : 2020-03-09 16:27:29
+@LastEditTime : 2020-03-09 18:07:21
 '''
 from django.shortcuts import render
 from django.views import View
@@ -39,7 +39,8 @@ def get_info_all(request):
     try:
         sub_info = CCFInfo.objects.all()
         response["list"] = json.loads(serializers.serialize("json",sub_info))
-        response["msg"] = "success"
+        response["msg"] = "返回ccf列表数据成功"
+        response["ret"] = 1
     except Exception as e:
         response["msg"] = str(e)
         response["err"] = 1
