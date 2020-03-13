@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : six
-Source Server Version : 50725
+Source Server         : localhost_3306
+Source Server Version : 50641
 Source Host           : localhost:3306
 Source Database       : dr_info
 
 Target Server Type    : MYSQL
-Target Server Version : 50725
+Target Server Version : 50641
 File Encoding         : 65001
 
-Date: 2020-03-12 14:55:26
+Date: 2020-03-13 15:33:52
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -391,11 +391,11 @@ INSERT INTO `dr_server_ccfinfo` VALUES ('118', 'MobiHoc', 'International Symposi
 INSERT INTO `dr_server_ccfinfo` VALUES ('119', 'NOSSDAV', 'International Workshop on Network and Operating System Support for Digital Audio and Video', 'ACM', 'http://dblp.uni-trier.de/db/conf/nossdav/', 'B', '计算机网络', '会议');
 INSERT INTO `dr_server_ccfinfo` VALUES ('120', 'IWQoS', 'International Workshop on Quality of Service', 'IEEE', 'http://dblp.uni-trier.de/db/conf/iwqos/', 'B', '计算机网络', '会议');
 INSERT INTO `dr_server_ccfinfo` VALUES ('121', 'IMC', 'Internet Measurement Conference', 'ACM/USENIX', 'http://dblp.uni-trier.de/db/conf/imc/', 'B', '计算机网络', '会议');
-INSERT INTO `dr_server_ccfinfo` VALUES ('122', 'ANCS', 'Architectures for Networking and Communications Systems', 'ACM/IEE\nE', 'http://dblp.uni-trier.de/db/conf/ancs/', 'C', '计算机网络', '会议');
+INSERT INTO `dr_server_ccfinfo` VALUES ('122', 'ANCS', 'Architectures for Networking and Communications Systems', 'ACM/IEEE', 'http://dblp.uni-trier.de/db/conf/ancs/', 'C', '计算机网络', '会议');
 INSERT INTO `dr_server_ccfinfo` VALUES ('123', 'APNOMS', 'Asia-Pacific Network Operations and Management Symposium', 'IFIP/IEEE', 'http://dblp.uni-trier.de/db/conf/apnoms/', 'C', '计算机网络', '会议');
 INSERT INTO `dr_server_ccfinfo` VALUES ('124', 'FORTE', 'Formal Techniques for Networked and Distributed Systems', 'Springer', 'http://dblp.uni-trier.de/db/conf/forte/', 'C', '计算机网络', '会议');
 INSERT INTO `dr_server_ccfinfo` VALUES ('125', 'LCN', 'IEEE Conference on Local Computer Networks', 'IEEE', 'http://dblp.uni-trier.de/db/conf/lcn/', 'C', '计算机网络', '会议');
-INSERT INTO `dr_server_ccfinfo` VALUES ('126', 'GLOBECO\nM', 'IEEE Global Communications Conference', 'IEEE', 'http://dblp.uni-trier.de/db/conf/globecom/', 'C', '计算机网络', '会议');
+INSERT INTO `dr_server_ccfinfo` VALUES ('126', 'GLOBECOM', 'IEEE Global Communications Conference', 'IEEE', 'http://dblp.uni-trier.de/db/conf/globecom/', 'C', '计算机网络', '会议');
 INSERT INTO `dr_server_ccfinfo` VALUES ('127', 'ICC', 'IEEE International Conference on Communications', 'IEEE', 'http://dblp.uni-trier.de/db/conf/icc/', 'C', '计算机网络', '会议');
 INSERT INTO `dr_server_ccfinfo` VALUES ('128', 'ICCCN', 'IEEE International Conference on Computer Communications and Networks', 'IEEE', 'http://dblp.uni-trier.de/db/conf/icccn/', 'C', '计算机网络', '会议');
 INSERT INTO `dr_server_ccfinfo` VALUES ('129', 'MASS', 'IEEE International Conference on Mobile Ad-hoc and Sensor Systems', 'IEEE', 'http://dblp.uni-trier.de/db/conf/mass/index.html', 'C', '计算机网络', '会议');
@@ -417,7 +417,7 @@ INSERT INTO `dr_server_ccfinfo` VALUES ('144', 'TISSEC', 'ACM Transactions on In
 INSERT INTO `dr_server_ccfinfo` VALUES ('145', 'nan', 'Computers & Security', 'Elsevier', 'http://dblp.uni-trier.de/db/journals/compsec/', 'B', '网络与信息安全', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('146', 'nan', 'Designs, Codes and Cryptography', 'Springer', 'http://dblp.uni-trier.de/db/journals/dcc/', 'B', '网络与信息安全', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('147', 'JCS', 'Journal of Computer Security', 'IOS Press', 'http://dblp.uni-trier.de/db/journals/jcs/', 'B', '网络与信息安全', '期刊');
-INSERT INTO `dr_server_ccfinfo` VALUES ('148', 'CLSR', 'Computer Law and Security Review', 'Elsevier', 'http://www.journals.elsevier.com/computer-law-and-se\ncurity-review/', 'C', '网络与信息安全', '期刊');
+INSERT INTO `dr_server_ccfinfo` VALUES ('148', 'CLSR', 'Computer Law and Security Review', 'Elsevier', 'http://www.journals.elsevier.com/computer-law-and-security-review/', 'C', '网络与信息安全', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('149', 'nan', 'EURASIP Journal on Information Security', 'Springer', 'http://dblp.uni-trier.de/db/journals/ejisec/', 'C', '网络与信息安全', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('150', 'nan', 'IET Information Security', 'IET', 'http://dblp.uni-trier.de/db/journals/iet-ifs/', 'C', '网络与信息安全', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('151', 'IMCS', 'Information Management & Computer Security', 'Emerald', 'http://dblp.uni-trier.de/db/journals/imcs/', 'C', '网络与信息安全', '期刊');
@@ -458,7 +458,7 @@ INSERT INTO `dr_server_ccfinfo` VALUES ('185', 'IFIP WG 11.9', 'IFIP WG 11.9 Int
 INSERT INTO `dr_server_ccfinfo` VALUES ('186', 'ISC', 'Information Security Conference', 'Springer', 'http://dblp.uni-trier.de/db/conf/isw/', 'C', '网络与信息安全', '会议');
 INSERT INTO `dr_server_ccfinfo` VALUES ('187', 'ICDF2C', 'International Conference on Digital Forensics & Cyber Crime', 'Springer', 'http://dblp.uni-trier.de/db/conf/icdf2c/', 'C', '网络与信息安全', '会议');
 INSERT INTO `dr_server_ccfinfo` VALUES ('188', 'ICICS', 'International Conference on Information and Communications Security', 'Springer', 'http://dblp.uni-trier.de/db/conf/icics/', 'C', '网络与信息安全', '会议');
-INSERT INTO `dr_server_ccfinfo` VALUES ('189', 'SecureComm', 'International Conference on Security and Privacy in Communication Networks', 'ACM', 'http://dblp.uni-trier.de/db/conf/securecom\nm/', 'C', '网络与信息安全', '会议');
+INSERT INTO `dr_server_ccfinfo` VALUES ('189', 'SecureComm', 'International Conference on Security and Privacy in Communication Networks', 'ACM', 'http://dblp.uni-trier.de/db/conf/securecomm/', 'C', '网络与信息安全', '会议');
 INSERT INTO `dr_server_ccfinfo` VALUES ('190', 'NSPW', 'New Security Paradigms Workshop', 'ACM', 'http://dblp.uni-trier.de/db/conf/nspw/', 'C', '网络与信息安全', '会议');
 INSERT INTO `dr_server_ccfinfo` VALUES ('191', 'PAM', 'Passive and Active Measurement Conference', 'Springer', 'http://dblp.uni-trier.de/db/conf/pam/', 'C', '网络与信息安全', '会议');
 INSERT INTO `dr_server_ccfinfo` VALUES ('192', 'PETS', 'Privacy Enhancing Technologies Symposium', 'Springer', 'http://dblp.uni-trier.de/db/conf/pet/', 'C', '网络与信息安全', '会议');
@@ -473,7 +473,7 @@ INSERT INTO `dr_server_ccfinfo` VALUES ('200', 'ESE', 'Empirical Software Engine
 INSERT INTO `dr_server_ccfinfo` VALUES ('201', 'TSC', 'IEEE Transactions on Service Computing', 'IEEE', 'http://dblp.uni-trier.de/db/journals/tsc/', 'B', '软件工程/系统软件/程序设计语言', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('202', 'IETS', 'IET Software', 'IET', 'https://dblp.uni-trier.de/db/journals/iet-sen/', 'B', '软件工程/系统软件/程序设计语言', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('203', 'IST', 'Information and Software Technology', 'Elsevier', 'http://dblp.uni-trier.de/db/journals/infsof/index.html', 'B', '软件工程/系统软件/程序设计语言', '期刊');
-INSERT INTO `dr_server_ccfinfo` VALUES ('204', 'JFP', 'Journal of Functional Programming', 'Cambridge \nUniversity Press', 'http://dblp.uni-trier.de/db/journals/jfp/', 'B', '软件工程/系统软件/程序设计语言', '期刊');
+INSERT INTO `dr_server_ccfinfo` VALUES ('204', 'JFP', 'Journal of Functional Programming', 'Cambridge University Press', 'http://dblp.uni-trier.de/db/journals/jfp/', 'B', '软件工程/系统软件/程序设计语言', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('205', 'nan', 'Journal of Software: Evolution and Process', 'Wiley', 'http://dblp.uni-trier.de/db/journals/smr/', 'B', '软件工程/系统软件/程序设计语言', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('206', 'JSS', 'Journal of Systems and Software', 'Elsevier', 'http://dblp.uni-trier.de/db/journals/jss/', 'B', '软件工程/系统软件/程序设计语言', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('207', 'RE', 'Requirements Engineering', 'Springer', 'http://dblp.uni-trier.de/db/journals/re/', 'B', '软件工程/系统软件/程序设计语言', '期刊');
@@ -488,7 +488,7 @@ INSERT INTO `dr_server_ccfinfo` VALUES ('215', 'JLAP', 'Journal of Logic and Alg
 INSERT INTO `dr_server_ccfinfo` VALUES ('216', 'JWE', 'Journal of Web Engineering', 'Rinton Press', 'http://dblp.uni-trier.de/db/journals/jwe/', 'C', '软件工程/系统软件/程序设计语言', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('217', 'SOCA', 'Service Oriented Computing and Applications', 'Springer', 'http://dblp.uni-trier.de/db/journals/soca/', 'C', '软件工程/系统软件/程序设计语言', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('218', 'SQJ', 'Software Quality Journal', 'Springer', 'http://dblp.uni-trier.de/db/journals/sqj/', 'C', '软件工程/系统软件/程序设计语言', '期刊');
-INSERT INTO `dr_server_ccfinfo` VALUES ('219', 'TPLP', 'Theory and Practice of Logic Programming', 'Cambridge University \nPress', 'http://dblp.uni-trier.de/db/journals/tplp/', 'C', '软件工程/系统软件/程序设计语言', '期刊');
+INSERT INTO `dr_server_ccfinfo` VALUES ('219', 'TPLP', 'Theory and Practice of Logic Programming', 'Cambridge University Press', 'http://dblp.uni-trier.de/db/journals/tplp/', 'C', '软件工程/系统软件/程序设计语言', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('220', 'PLDI', 'ACM SIGPLAN Conference on Programming Language Design & Implementation', 'ACM', 'http://dblp.uni-trier.de/db/conf/pldi/', 'A', '软件工程/系统软件/程序设计语言', '会议');
 INSERT INTO `dr_server_ccfinfo` VALUES ('221', 'POPL', 'ACM SIGPLAN-SIGACT Symposium on Principles of Programming Languages', 'ACM', 'http://dblp.uni-trier.de/db/conf/popl/', 'A', '软件工程/系统软件/程序设计语言', '会议');
 INSERT INTO `dr_server_ccfinfo` VALUES ('222', 'FSE/ESEC', 'ACM SIGSOFT Symposium on the Foundation of Software Engineering/ European Software Engineering Conference', 'ACM', 'http://dblp.uni-trier.de/db/conf/sigsoft/', 'A', '软件工程/系统软件/程序设计语言', '会议');
@@ -511,7 +511,7 @@ INSERT INTO `dr_server_ccfinfo` VALUES ('238', 'ICSOC', 'International Conferenc
 INSERT INTO `dr_server_ccfinfo` VALUES ('239', 'ICSME', 'International Conference on Software Maintenance and Evolution', 'IEEE', 'http://dblp.uni-trier.de/db/conf/icsm/', 'B', '软件工程/系统软件/程序设计语言', '会议');
 INSERT INTO `dr_server_ccfinfo` VALUES ('240', 'VMCAI', 'International Conference on Verification, Model Checking, and Abstract Interpretation', 'Springer', 'http://dblp.uni-trier.de/db/conf/vmcai/', 'B', '软件工程/系统软件/程序设计语言', '会议');
 INSERT INTO `dr_server_ccfinfo` VALUES ('241', 'ICWS', 'International Conference on Web Services （Research Track）', 'IEEE', 'http://dblp.uni-trier.de/db/conf/icws/', 'B', '软件工程/系统软件/程序设计语言', '会议');
-INSERT INTO `dr_server_ccfinfo` VALUES ('242', 'Middleware', 'International Middleware Conference', 'ACM/IFIP/ \nUSENIX', 'http://dblp.uni-trier.de/db/conf/middleware/', 'B', '软件工程/系统软件/程序设计语言', '会议');
+INSERT INTO `dr_server_ccfinfo` VALUES ('242', 'Middleware', 'International Middleware Conference', 'ACM/IFIP/ USENIX', 'http://dblp.uni-trier.de/db/conf/middleware/', 'B', '软件工程/系统软件/程序设计语言', '会议');
 INSERT INTO `dr_server_ccfinfo` VALUES ('243', 'SAS', 'International Static Analysis Symposium', 'Springer', 'http://dblp.uni-trier.de/db/conf/sas/', 'B', '软件工程/系统软件/程序设计语言', '会议');
 INSERT INTO `dr_server_ccfinfo` VALUES ('244', 'ESEM', 'International Symposium on Empirical Software Engineering and Measurement', 'ACM/IEEE', 'http://dblp.uni-trier.de/db/conf/esem/', 'B', '软件工程/系统软件/程序设计语言', '会议');
 INSERT INTO `dr_server_ccfinfo` VALUES ('245', 'FM', 'International Symposium on Formal Methods', 'FME', 'http://dblp.uni-trier.de/db/conf/fm/', 'B', '软件工程/系统软件/程序设计语言', '会议');
@@ -555,7 +555,7 @@ INSERT INTO `dr_server_ccfinfo` VALUES ('282', 'nan', 'GeoInformatica', 'Springe
 INSERT INTO `dr_server_ccfinfo` VALUES ('283', 'IPM', 'Information Processing and Management', 'Elsevier', 'http://dblp.uni-trier.de/db/journals/ipm/', 'B', '数据库/数据挖掘/内容检索', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('284', 'nan', 'Information Sciences', 'Elsevier', 'http://dblp.uni-trier.de/db/journals/isci/', 'B', '数据库/数据挖掘/内容检索', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('285', 'IS', 'Information Systems', 'Elsevier', 'http://dblp.uni-trier.de/db/journals/is/', 'B', '数据库/数据挖掘/内容检索', '期刊');
-INSERT INTO `dr_server_ccfinfo` VALUES ('286', 'JASIST', 'Journal of the American Society for Information Science and Technology', 'American Society for \nInformation Science and \nTechnology', 'http://dblp.uni-trier.de/db/journals/jasis/', 'B', '数据库/数据挖掘/内容检索', '期刊');
+INSERT INTO `dr_server_ccfinfo` VALUES ('286', 'JASIST', 'Journal of the American Society for Information Science and Technology', 'American Society for Information Science and Technology', 'http://dblp.uni-trier.de/db/journals/jasis/', 'B', '数据库/数据挖掘/内容检索', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('287', 'JWS', 'Journal of Web Semantics', 'Elsevier', 'http://dblp.uni-trier.de/db/journals/ws/', 'B', '数据库/数据挖掘/内容检索', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('288', 'KAIS', 'Knowledge and Information Systems', 'Springer', 'http://dblp.uni-trier.de/db/journals/kais/', 'B', '数据库/数据挖掘/内容检索', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('289', 'DPD', 'Distributed and Parallel Databases', 'Springer', 'http://dblp.uni-trier.de/db/journals/dpd/', 'C', '数据库/数据挖掘/内容检索', '期刊');
@@ -569,19 +569,19 @@ INSERT INTO `dr_server_ccfinfo` VALUES ('296', 'IJKM', 'International Journal of
 INSERT INTO `dr_server_ccfinfo` VALUES ('297', 'IJSWIS', 'International Journal on Semantic Web and Information Systems', 'IGI', 'http://dblp.uni-trier.de/db/journals/ijswis/', 'C', '数据库/数据挖掘/内容检索', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('298', 'JCIS', 'Journal of Computer Information Systems', 'IACIS', 'http://dblp.uni-trier.de/db/journals/jcis/', 'C', '数据库/数据挖掘/内容检索', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('299', 'JDM', 'Journal of Database Management', 'IGI-Global', 'http://dblp.uni-trier.de/db/journals/jdm/', 'C', '数据库/数据挖掘/内容检索', '期刊');
-INSERT INTO `dr_server_ccfinfo` VALUES ('300', 'JGITM', 'Journal of Global Information Technology Management', 'Ivy League \nPublishing', 'http://www.tandfonline.com/loi/ugit20#.Vnv35pN97rI', 'C', '数据库/数据挖掘/内容检索', '期刊');
+INSERT INTO `dr_server_ccfinfo` VALUES ('300', 'JGITM', 'Journal of Global Information Technology Management', 'Ivy League Publishing', 'http://www.tandfonline.com/loi/ugit20#.Vnv35pN97rI', 'C', '数据库/数据挖掘/内容检索', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('301', 'JIIS', 'Journal of Intelligent Information Systems', 'Springer', 'http://dblp.uni-trier.de/db/journals/jiis/', 'C', '数据库/数据挖掘/内容检索', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('302', 'JSIS', 'Journal of Strategic Information Systems', 'Elsevier', 'http://dblp.uni-trier.de/db/journals/jsis/', 'C', '数据库/数据挖掘/内容检索', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('303', 'SIGMOD', 'ACM Conference on Management of Data', 'ACM', 'http://dblp.uni-trier.de/db/conf/sigmod/', 'A', '数据库/数据挖掘/内容检索', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('304', 'SIGKDD', 'ACM Knowledge Discovery and Data Mining', 'ACM', 'http://dblp.uni-trier.de/db/conf/kdd/', 'A', '数据库/数据挖掘/内容检索', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('305', 'ICDE', 'IEEE International Conference on Data Engineering', 'IEEE', 'http://dblp.uni-trier.de/db/conf/icde/', 'A', '数据库/数据挖掘/内容检索', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('306', 'SIGIR', 'International Conference on Research on Development in Information Retrieval', 'ACM', 'http://dblp.uni-trier.de/db/conf/sigir/', 'A', '数据库/数据挖掘/内容检索', '期刊');
-INSERT INTO `dr_server_ccfinfo` VALUES ('307', 'VLDB', 'International Conference on Very Large Data Bases', 'Morgan \nKaufmann/ACM', 'http://dblp.uni-trier.de/db/conf/vldb/', 'A', '数据库/数据挖掘/内容检索', '期刊');
+INSERT INTO `dr_server_ccfinfo` VALUES ('307', 'VLDB', 'International Conference on Very Large Data Bases', 'Morgan Kaufmann/ACM', 'http://dblp.uni-trier.de/db/conf/vldb/', 'A', '数据库/数据挖掘/内容检索', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('308', 'CIKM', 'ACM International Conference on Information and Knowledge Management', 'ACM', 'http://dblp.uni-trier.de/db/conf/cikm/', 'B', '数据库/数据挖掘/内容检索', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('309', 'WSDM', 'ACM International Conference on Web Search and Data Mining', 'ACM', 'http://dblp.uni-trier.de/db/conf/wsdm/', 'B', '数据库/数据挖掘/内容检索', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('310', 'PODS', 'ACM Symposium on Principles of Database Systems', 'ACM', 'http://dblp.uni-trier.de/db/conf/pods/', 'B', '数据库/数据挖掘/内容检索', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('311', 'DASFAA', 'Database Systems for Advanced Applications', 'Springer', 'http://dblp.uni-trier.de/db/conf/dasfaa/', 'B', '数据库/数据挖掘/内容检索', '期刊');
-INSERT INTO `dr_server_ccfinfo` VALUES ('312', 'ECML-PKDD', 'European Conference on Machine Learning and Principles and Practice of Knowledge Discovery in Databases', 'Springer', 'http://dblp.uni-trier.de/db/conf/ecml/ \nhttp://dblp.uni-trier.de/db/conf/pkdd/', 'B', '数据库/数据挖掘/内容检索', '期刊');
+INSERT INTO `dr_server_ccfinfo` VALUES ('312', 'ECML-PKDD', 'European Conference on Machine Learning and Principles and Practice of Knowledge Discovery in Databases', 'Springer', 'http://dblp.uni-trier.de/db/conf/ecml/ http://dblp.uni-trier.de/db/conf/pkdd/', 'B', '数据库/数据挖掘/内容检索', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('313', 'ISWC', 'IEEE International Semantic Web Conference', 'IEEE', 'http://dblp.uni-trier.de/db/conf/semweb/', 'B', '数据库/数据挖掘/内容检索', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('314', 'ICDM', 'International Conference on Data Mining', 'IEEE', 'http://dblp.uni-trier.de/db/conf/icdm/', 'B', '数据库/数据挖掘/内容检索', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('315', 'ICDT', 'International Conference on Database Theory', 'Springer', 'http://dblp.uni-trier.de/db/conf/icdt/', 'B', '数据库/数据挖掘/内容检索', '期刊');
@@ -614,7 +614,7 @@ INSERT INTO `dr_server_ccfinfo` VALUES ('341', 'INFORMS', 'INFORMS Journal on Co
 INSERT INTO `dr_server_ccfinfo` VALUES ('342', 'JCSS', 'Journal of Computer and System Sciences', 'Elsevier', 'http://dblp.uni-trier.de/db/journals/jcss/', 'B', '计算机科学理论', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('343', 'JGO', 'Journal of Global Optimization', 'Springer', 'http://dblp.uni-trier.de/db/journals/jgo/', 'B', '计算机科学理论', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('344', 'JSC', 'Journal of Symbolic Computation', 'Elsevier', 'http://dblp.uni-trier.de/db/journals/jsc/', 'B', '计算机科学理论', '期刊');
-INSERT INTO `dr_server_ccfinfo` VALUES ('345', 'MSCS', 'Mathematical Structures in Computer Science', 'Cambridge \nUniversity Press', 'http://dblp.uni-trier.de/db/journals/mscs/', 'B', '计算机科学理论', '期刊');
+INSERT INTO `dr_server_ccfinfo` VALUES ('345', 'MSCS', 'Mathematical Structures in Computer Science', 'Cambridge University Press', 'http://dblp.uni-trier.de/db/journals/mscs/', 'B', '计算机科学理论', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('346', 'TCS', 'Theoretical Computer Science', 'Elsevier', 'http://dblp.uni-trier.de/db/journals/tcs/', 'B', '计算机科学理论', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('347', 'ACTA', 'Acta Informatica', 'Springer', 'http://dblp.uni-trier.de/db/journals/acta/', 'C', '计算机科学理论', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('348', 'APAL', 'Annals of Pure and Applied Logic', 'Elsevier', 'http://dblp.uni-trier.de/db/journals/apal/', 'C', '计算机科学理论', '期刊');
@@ -643,7 +643,7 @@ INSERT INTO `dr_server_ccfinfo` VALUES ('370', 'HSCC', 'International Conference
 INSERT INTO `dr_server_ccfinfo` VALUES ('371', 'SAT', 'Theory and Applications of Satisfiability Testing', 'Springer', 'http://dblp.uni-trier.de/db/conf/sat/', 'B', '计算机科学理论', '会议');
 INSERT INTO `dr_server_ccfinfo` VALUES ('372', 'CSL', 'Computer Science Logic', 'Springer', 'http://dblp.uni-trier.de/db/conf/csl/', 'C', '计算机科学理论', '会议');
 INSERT INTO `dr_server_ccfinfo` VALUES ('373', 'FMCAD', 'Formal Methods in Computer-Aided Design', 'ACM', 'http://dblp.uni-trier.de/db/conf/fmcad/', 'C', '计算机科学理论', '会议');
-INSERT INTO `dr_server_ccfinfo` VALUES ('374', 'FSTTCS', 'Foundations of Software Technology and Theoretical Computer Science', 'Indian Association for Research \nin Computing Science', 'http://dblp.uni-trier.de/db/conf/fsttcs/', 'C', '计算机科学理论', '会议');
+INSERT INTO `dr_server_ccfinfo` VALUES ('374', 'FSTTCS', 'Foundations of Software Technology and Theoretical Computer Science', 'Indian Association for Research in Computing Science', 'http://dblp.uni-trier.de/db/conf/fsttcs/', 'C', '计算机科学理论', '会议');
 INSERT INTO `dr_server_ccfinfo` VALUES ('375', 'DSAA', 'IEEE International Conference on Data Science and Advanced Analytics', 'IEEE', 'https://dblp.uni-trier.de/db/conf/dsaa/', 'C', '计算机科学理论', '会议');
 INSERT INTO `dr_server_ccfinfo` VALUES ('376', 'ICTAC', 'International Colloquium on Theoretical Aspects of Computing', 'Springer', 'http://dblp.uni-trier.de/db/conf/ictac/', 'C', '计算机科学理论', '会议');
 INSERT INTO `dr_server_ccfinfo` VALUES ('377', 'IPCO', 'International Conference on Integer Programming and Combinatorial Optimization', 'Springer', 'http://dblp.uni-trier.de/db/conf/ipco/', 'C', '计算机科学理论', '会议');
@@ -665,7 +665,7 @@ INSERT INTO `dr_server_ccfinfo` VALUES ('392', 'JASA', 'Journal of The Acoustica
 INSERT INTO `dr_server_ccfinfo` VALUES ('393', 'SIIMS', 'SIAM Journal on Imaging Sciences', 'SIAM', 'http://dblp.uni-trier.de/db/journals/siamis/', 'B', '计算机图形学与多媒体', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('394', 'Speech Com', 'Speech Communication', 'Elsevier', 'http://dblp.uni-trier.de/db/journals/speech/', 'B', '计算机图形学与多媒体', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('395', 'CGTA', 'Computational Geometry: Theory and Applications', 'Elsevier', 'http://dblp.uni-trier.de/db/journals/comgeo/', 'C', '计算机图形学与多媒体', '期刊');
-INSERT INTO `dr_server_ccfinfo` VALUES ('396', 'CAVW', 'Computer Animation and Virtual Worlds', 'Wiley', 'http://onlinelibrary.wiley.com/journal/10.1002/(ISSN)1546\n-427X', 'C', '计算机图形学与多媒体', '期刊');
+INSERT INTO `dr_server_ccfinfo` VALUES ('396', 'CAVW', 'Computer Animation and Virtual Worlds', 'Wiley', 'http://onlinelibrary.wiley.com/journal/10.1002/(ISSN)1546-427X', 'C', '计算机图形学与多媒体', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('397', 'C&G', 'Computers & Graphics', 'Elsevier', 'http://dblp.uni-trier.de/db/journals/cg/', 'C', '计算机图形学与多媒体', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('398', 'DCG', 'Discrete & Computational Geometry', 'Springer', 'http://dblp.uni-trier.de/db/journals/dcg/', 'C', '计算机图形学与多媒体', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('399', 'SPL', 'IEEE Signal Processing Letters', 'IEEE', 'http://dblp.uni-trier.de/db/journals/spl/', 'C', '计算机图形学与多媒体', '期刊');
@@ -724,7 +724,7 @@ INSERT INTO `dr_server_ccfinfo` VALUES ('451', 'TFS', 'IEEE Transactions on Fuzz
 INSERT INTO `dr_server_ccfinfo` VALUES ('452', 'TNNLS', 'IEEE Transactions on Neural Networks and learning systems', 'IEEE', 'http://dblp.uni-trier.de/db/journals/tnn/', 'B', '人工智能', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('453', 'IJAR', 'International Journal of Approximate Reasoning', 'Elsevier', 'http://dblp.uni-trier.de/db/journals/ijar/', 'B', '人工智能', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('454', 'nan', 'Journal of Automated Reasoning', 'Springer', 'http://dblp.uni-trier.de/db/journals/jar/', 'B', '人工智能', '期刊');
-INSERT INTO `dr_server_ccfinfo` VALUES ('455', 'JSLHR', 'Journal of Speech, Language, and Hearing Research', 'American \nSpeech-Language \nHearing Association', 'http://jslhr.pubs.asha.org/', 'B', '人工智能', '期刊');
+INSERT INTO `dr_server_ccfinfo` VALUES ('455', 'JSLHR', 'Journal of Speech, Language, and Hearing Research', 'American Speech-Language Hearing Association', 'http://jslhr.pubs.asha.org/', 'B', '人工智能', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('456', 'nan', 'Machine Learning', 'Springer', 'http://dblp.uni-trier.de/db/journals/ml/', 'B', '人工智能', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('457', 'nan', 'Neural Computation', 'MIT Press', 'http://dblp.uni-trier.de/db/journals/neco/', 'B', '人工智能', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('458', 'nan', 'Neural Networks', 'Elsevier', 'http://dblp.uni-trier.de/db/journals/nn/', 'B', '人工智能', '期刊');
@@ -756,7 +756,7 @@ INSERT INTO `dr_server_ccfinfo` VALUES ('483', 'KBS', 'Knowledge-Based Systems',
 INSERT INTO `dr_server_ccfinfo` VALUES ('484', 'nan', 'Machine Translation', 'Springer', 'http://dblp.uni-trier.de/db/journals/mt/', 'C', '人工智能', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('485', 'nan', 'Machine Vision and Applications', 'Springer', 'http://dblp.uni-trier.de/db/journals/mva/', 'C', '人工智能', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('486', 'nan', 'Natural Computing', 'Springer', 'http://dblp.uni-trier.de/db/journals/nc/', 'C', '人工智能', '期刊');
-INSERT INTO `dr_server_ccfinfo` VALUES ('487', 'NLE', 'Natural Language Engineering', 'Cambridge University \nPress', 'http://dblp.uni-trier.de/db/journals/nle/', 'C', '人工智能', '期刊');
+INSERT INTO `dr_server_ccfinfo` VALUES ('487', 'NLE', 'Natural Language Engineering', 'Cambridge University Press', 'http://dblp.uni-trier.de/db/journals/nle/', 'C', '人工智能', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('488', 'NCA', 'Neural Computing & Applications', 'Springer', 'http://dblp.uni-trier.de/db/journals/nca/', 'C', '人工智能', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('489', 'nan', 'Neurocomputing', 'Elsevier', 'http://dblp.uni-trier.de/db/journals/ijon/', 'C', '人工智能', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('490', 'PAA', 'Pattern Analysis and Applications', 'Springer', 'http://dblp.uni-trier.de/db/journals/paa/', 'C', '人工智能', '期刊');
@@ -785,12 +785,12 @@ INSERT INTO `dr_server_ccfinfo` VALUES ('512', 'PPSN', 'Parallel Problem Solving
 INSERT INTO `dr_server_ccfinfo` VALUES ('513', 'AISTATS', 'Artificial Intelligence and Statistics', 'JMLR', 'http://dblp.uni-trier.de/db/conf/aistats/', 'C', '人工智能', '会议');
 INSERT INTO `dr_server_ccfinfo` VALUES ('514', 'ACCV', 'Asian Conference on Computer Vision', 'Springer', 'http://dblp.uni-trier.de/db/conf/accv/', 'C', '人工智能', '会议');
 INSERT INTO `dr_server_ccfinfo` VALUES ('515', 'ACML', 'Asian Conference on Machine Learning', 'JMLR', 'http://dblp.uni-trier.de/db/conf/acml/', 'C', '人工智能', '会议');
-INSERT INTO `dr_server_ccfinfo` VALUES ('516', 'BMVC', 'British Machine Vision Conference', 'British Machine Vision \nAssociation', 'http://dblp.uni-trier.de/db/conf/bmvc/', 'C', '人工智能', '会议');
+INSERT INTO `dr_server_ccfinfo` VALUES ('516', 'BMVC', 'British Machine Vision Conference', 'British Machine Vision Association', 'http://dblp.uni-trier.de/db/conf/bmvc/', 'C', '人工智能', '会议');
 INSERT INTO `dr_server_ccfinfo` VALUES ('517', 'NLPCC', 'CCF International Conference on Natural Language Processing and Chinese Computing', 'Springer', 'https://dblp.uni-trier.de/db/conf/nlpcc/', 'C', '人工智能', '会议');
-INSERT INTO `dr_server_ccfinfo` VALUES ('518', 'CoNLL', 'Conference on Computational Natural Language Learning', 'Association for \nComputational Linguistics', 'http://dblp.uni-trier.de/db/conf/conll', 'C', '人工智能', '会议');
+INSERT INTO `dr_server_ccfinfo` VALUES ('518', 'CoNLL', 'Conference on Computational Natural Language Learning', 'Association for Computational Linguistics', 'http://dblp.uni-trier.de/db/conf/conll', 'C', '人工智能', '会议');
 INSERT INTO `dr_server_ccfinfo` VALUES ('519', 'GECCO', 'Genetic and Evolutionary Computation Conference', 'ACM', 'http://dblp.uni-trier.de/db/conf/gecco/', 'C', '人工智能', '会议');
 INSERT INTO `dr_server_ccfinfo` VALUES ('520', 'ICTAI', 'IEEE International Conference on Tools with Artificial Intelligence', 'IEEE', 'http://dblp.uni-trier.de/db/conf/ictai/', 'C', '人工智能', '会议');
-INSERT INTO `dr_server_ccfinfo` VALUES ('521', 'IROS', 'IEEE\\RSJ International Conference on Intelligent Robots and Systems', 'IEEE', 'http://dblp.uni-trier.de/db/conf/iros/', 'C', '人工智能', '会议');
+INSERT INTO `dr_server_ccfinfo` VALUES ('521', 'IROS', 'IEEE\\\\RSJ International Conference on Intelligent Robots and Systems', 'IEEE', 'http://dblp.uni-trier.de/db/conf/iros/', 'C', '人工智能', '会议');
 INSERT INTO `dr_server_ccfinfo` VALUES ('522', 'ALT', 'International Conference on Algorithmic Learning Theory', 'Springer', 'http://dblp.uni-trier.de/db/conf/alt/', 'C', '人工智能', '会议');
 INSERT INTO `dr_server_ccfinfo` VALUES ('523', 'ICANN', 'International Conference on Artificial Neural Networks', 'Springer', 'http://dblp.uni-trier.de/db/conf/icann/', 'C', '人工智能', '会议');
 INSERT INTO `dr_server_ccfinfo` VALUES ('524', 'FG', 'International Conference on Automatic Face and Gesture Recognition', 'IEEE', 'http://dblp.uni-trier.de/db/conf/fgr/', 'C', '人工智能', '会议');
@@ -851,12 +851,12 @@ INSERT INTO `dr_server_ccfinfo` VALUES ('578', 'TCBB', 'IEEE-ACM Transactions on
 INSERT INTO `dr_server_ccfinfo` VALUES ('579', 'JCST', 'Journal of Computer Science and Technology', 'SCIENCE PRESS/Springer', 'http://dblp.uni-trier.de/db/journals/jcst/', 'B', '交叉/综合/新兴', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('580', 'JAMIA', 'Journal of the American Medical Informatics Association', 'BMJ Journals', 'http://dblp.uni-trier.de/db/journals/jamia/', 'B', '交叉/综合/新兴', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('581', 'nan', 'PLOS Computational Biology', 'Public Library of Science', 'http://dblp.uni-trier.de/db/journals/ploscb/', 'B', '交叉/综合/新兴', '期刊');
-INSERT INTO `dr_server_ccfinfo` VALUES ('582', 'nan', 'Science China Information Sciences', 'Science in China \nPress/Springer', 'http://dblp.uni-trier.de/db/journals/chinaf/', 'B', '交叉/综合/新兴', '期刊');
+INSERT INTO `dr_server_ccfinfo` VALUES ('582', 'nan', 'Science China Information Sciences', 'Science in China Press/Springer', 'http://dblp.uni-trier.de/db/journals/chinaf/', 'B', '交叉/综合/新兴', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('583', 'nan', 'The Computer Journal', 'Oxford University Press', 'http://dblp.uni-trier.de/db/journals/cj/', 'B', '交叉/综合/新兴', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('584', 'nan', 'World Wide Web Journal', 'Springer', 'http://dblp.uni-trier.de/db/journals/wwwj/', 'B', '交叉/综合/新兴', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('585', 'nan', 'BMC Bioinformatics', 'BioMed Central', 'http://dblp.uni-trier.de/db/journals/bmcbi/', 'C', '交叉/综合/新兴', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('586', 'nan', 'Cybernetics and Systems', 'Taylor & Francis', 'http://dblp.uni-trier.de/db/journals/cas/', 'C', '交叉/综合/新兴', '期刊');
-INSERT INTO `dr_server_ccfinfo` VALUES ('587', 'FCS', 'Frontiers of Computer Science', 'Higher Education \nPress', 'http://dblp.uni-trier.de/db/journals/fcsc/', 'C', '交叉/综合/新兴', '期刊');
+INSERT INTO `dr_server_ccfinfo` VALUES ('587', 'FCS', 'Frontiers of Computer Science', 'Higher Education Press', 'http://dblp.uni-trier.de/db/journals/fcsc/', 'C', '交叉/综合/新兴', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('588', 'nan', 'IEEE Geoscience and Remote Sensing Letters', 'IEEE', 'http://dblp.uni-trier.de/db/journals/lgrs/', 'C', '交叉/综合/新兴', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('589', 'JBHI', 'IEEE Journal of Biomedical and Health Informatics', 'IEEE', 'http://dblp.uni-trier.de/db/journals/titb/', 'C', '交叉/综合/新兴', '期刊');
 INSERT INTO `dr_server_ccfinfo` VALUES ('590', 'TBD', 'IEEE Transactions on Big Data', 'IEEE', 'https://dblp.uni-trier.de/db/journals/tbd/', 'C', '交叉/综合/新兴', '期刊');
