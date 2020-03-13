@@ -13,9 +13,9 @@ from django.core import serializers
 
 from django.views.decorators.http import require_http_methods
 from .models import CCFInfo
+from django.db.models import Count
 # Create your views here.
 import json
-
 
 @require_http_methods(["GET"])
 def get_info_for_subject(request):
@@ -35,10 +35,16 @@ def get_info_for_subject(request):
 @require_http_methods(["GET"])
 def get_info_all(request):
     response = {}
-    sub = request.GET.get("subject")
     try:
-        sub_info = CCFInfo.objects.all()
-        response["list"] = json.loads(serializers.serialize("json",sub_info))
+        ccf_info = CCFInfo.objects.all()
+        sub_info = CCFInfo.objects.values("subject").annotate(Count("subject"))
+        ccf_list = []
+        sub_list = []
+        for sub in sub_info:
+            sub_list.append(sub["subject"])
+            ccf_list.append(json.loads(serializers.serialize("json",ccf_info.filter(subject=sub["subject"]))))
+        response["sub_list"] = sub_list
+        response["ccf_list"] = ccf_list
         response["msg"] = "返回ccf列表数据成功"
         response["ret"] = 1
     except Exception as e:
