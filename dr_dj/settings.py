@@ -25,7 +25,7 @@ SECRET_KEY = 'z-o5m#i9w#&9b1&&#^i52o!2rh$v)i+bnej1(=^(@x@4fo#iij'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["39.97.232.156"]
+ALLOWED_HOSTS = ["39.97.232.156","127.0.0.1"]
 
 
 # Application definition
@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'dr_server'
+    'dr_server',
+    'rest_framework',
+    "django_filters"
 ]
 
 MIDDLEWARE = [
@@ -122,8 +124,20 @@ USE_L10N = True
 
 USE_TZ = True
 
+REST_FRAMEWORK = {
+    # 'PAGE_SIZE': 10,
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+    )
+}
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+#celery
+# CELERY_BROKER_URL = "redis://localhost:6379/0"
+# CELERY_RESULT_BACKEND = "redis://localhost:6379/0"
