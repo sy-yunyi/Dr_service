@@ -36,8 +36,8 @@ def api_root(request, format=None):
         "journals_hot":reverse('journals_hot',request=request,format=format),
         "journals_sub":reverse("journals_sub",request=request,kwargs={'sub':"管理科学"},format=format),
         "journals_id":reverse("journals_id",request=request,kwargs={'jid':1},format=format),
-        "journals_sea":reverse("journals_sea",request=request,kwargs={'search':'4OR'},format=format)
-
+        "journals_sea":reverse("journals_sea",request=request,kwargs={'search':'4OR'},format=format),
+        "journals":reverse("journals",request=request,format=format)
     })
 
 class CCFInfoList(generics.ListCreateAPIView):
@@ -62,6 +62,33 @@ class CCFInfoList(generics.ListCreateAPIView):
         response['sub_list'] = sub_list
         return Response(response)
 
+class CCFJournalInfo(APIView):
+
+    def get(self,request,journal_name,format = None):
+        ccfjoural = CCFInfo.objects.get(full_name_u=journal_name)
+        data1 = CCFInfoSerializer(ccfjoural).data
+        response = {
+            'ret':"1",
+            'msg': 'success',
+            'data':' '
+            }
+        # pdb.set_trace()
+        try:
+            journal = JournalsInfo.objects.filter(journal_name_u=journal_name)
+            data2 = JournalsSerializer(journal,many=True).data[0]
+        except:
+            response["data"]=data1
+            return Response(response)
+        else:
+            response["data"]=dict(data1,**data2)
+            return Response(response)
+
+            
+
+        # ccf = CCFInfo.objects.get(full_name_u=journal_name)
+        
+
+
 class ConferenceList(APIView):
     """
     列出所有的会议，或者增加一个会议
@@ -74,7 +101,7 @@ class ConferenceList(APIView):
         return Response(con_serializer.data)
     
     def post(self,request,format=None):
-        con_serializer = ConferenceSerializer(data=reuqest.data)
+        con_serializer = ConferenceSerializer(data=request.data)
         if con_serializer.is_valid():
             con_serializer.save()
             return Response(con_serializers.data,status=status.HTTP_201_CREATED)
@@ -111,7 +138,10 @@ class ConferenceInfoDetail(APIView):
         except ConferenceInfo.DoesNotExist:
             return 0
 
-    def get(self,reuqest,format=None):
+    def get(self,request,format=None):
+        """
+        通过名称，简称，ID 获取会议信息
+        """
         con_name = self.request.query_params.get('con_name', None)
         con_sname = self.request.query_params.get('con_sname', None)
         con_id = self.request.query_params.get('id', None)
@@ -131,7 +161,10 @@ class ConferenceInfoDetail(APIView):
             raise Http404
  
 
-    def put(self,reuqest,format=None):
+    def put(self,request,format=None):
+        """
+        通过ID，更新会议信息
+        """
         con_id = self.request.query_params.get('id', None)
         conf = self.get_object_by_id(con_id)
         conf_ser = ConferenceSerializer(conf,request.data)
@@ -142,6 +175,9 @@ class ConferenceInfoDetail(APIView):
         return Response(conf_ser.error,status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self,request,format=None):
+        """
+        通过ID 删除会议
+        """
         con_id = self.request.query_params.get('id', None)
         conf = self.get_object_by_id(con_id)
         conf.delete()
@@ -158,7 +194,7 @@ class JournalsHotList(APIView):
             journal_info = JournalsInfo.objects.filter(journal_hot=True)
             response = {
             'ret': 1,
-            'journal_list': [],
+            'data': [],
             'msg': 'success',
             'total': ''}
             journal_list = []
@@ -170,12 +206,47 @@ class JournalsHotList(APIView):
                 journal_dict["property"] = [journal.journal_b_sub,"影响因子："+ str(journal.journal_index)]
                 journal_dict["rate"] = ["JCR: "+ str(journal.journal_jcr),"CCF: "+ str(journal.journal_ccf)]
                 journal_list.append(journal_dict)
-            response["journal_list"] = journal_list
+            response["data"] = journal_list
         except JournalsInfo.DoesNotExist:
             raise Http404
         else:
             # return Response(JournalsSerializer(journal_info,many=True).data)
             return Response(response)
+    
+class JournalInfoList(APIView):
+    serializer_class = JournalsSerializer
+
+    def get(self,request,format=None):
+        try:
+            journal_info = JournalsInfo.objects.all()
+            response = {
+            'ret': 1,
+            'data': [],
+            'msg': 'success',
+            'total': ''}
+            journal_list = []
+            for journal in journal_info:
+                journal_dict = {}
+                journal_dict["journal_id"] = journal.id
+                journal_dict["fullName"] = journal.journal_name
+                journal_dict["shortName"] = journal.journal_short_name
+                journal_dict["property"] = [journal.journal_b_sub,"影响因子："+ str(journal.journal_index)]
+                journal_dict["rate"] = ["JCR: "+ str(journal.journal_jcr),"CCF: "+ str(journal.journal_ccf)]
+                journal_list.append(journal_dict)
+            response["data"] = journal_list
+        except JournalsInfo.DoesNotExist:
+            raise Http404
+        else:
+            return Response(response)
+    
+    def post(self,request,format=None):
+        jou_serializer = JournalsSerializer(data=request.data,many=False)
+
+        if jou_serializer.is_valid():
+            jou_serializer.save()
+            return Response(jou_serializer.data,status=status.HTTP_201_CREATED)
+        pdb.set_trace()
+        return Response("error",status=status.HTTP_400_BAD_REQUEST)
         
 class JournalsSubList(APIView):
 
@@ -184,7 +255,7 @@ class JournalsSubList(APIView):
             journal_info = JournalsInfo.objects.filter(journal_b_sub=sub)
             response = {
             'ret': 1,
-            'journal_list': [],
+            'data': [],
             'msg': 'success',
             'total': ''}
             journal_list = []
@@ -196,7 +267,7 @@ class JournalsSubList(APIView):
                 journal_dict["property"] = [journal.journal_b_sub,"影响因子："+ str(journal.journal_index)]
                 journal_dict["rate"] = ["JCR: "+ str(journal.journal_jcr),"CCF: "+ str(journal.journal_ccf)]
                 journal_list.append(journal_dict)
-            response["journal_list"] = journal_list
+            response["data"] = journal_list
         except JournalsInfo.DoesNotExist:
             raise Http404
         else:
@@ -204,14 +275,17 @@ class JournalsSubList(APIView):
             return Response(response)
     
     def post(self,resquest,format=None):
-        jou_serializer = JournalsSerializer(data=reuqest.data)
+        jou_serializer = JournalsSerializer(data=request.data)
         if jou_serializer.is_valid():
             jou_serializer.save()
             return Response(jou_serializer.data,status=status.HTTP_201_CREATED)
-        return Response(jou_serializer.error,status=status.HTTP_400_BAD_REQUEST)
+        return Response("error",status=status.HTTP_400_BAD_REQUEST)
 
 
 class JournalInfoDetial(APIView):
+    """
+    通过期刊ID获取期刊信息或者更新期刊信息
+    """
     # filter_class = JournalsFilter
     serializer_class = JournalsSerializer
     # search_fields = ("journal_name","journal_short_name")
@@ -224,9 +298,22 @@ class JournalInfoDetial(APIView):
         }
         response["data"] = JournalsSerializer(journal_info,many=True).data
         return Response(response)
+    
+    def put(self,request,jid,format=None):
+        """
+        通过ID，更新期刊信息
+        """
+        journal_info = JournalsInfo.objects.filter(id=jid)
+        journal = ConferenceSerializer(journal_info,request.data)
+
+        if journal.is_valid():
+            journal.save()
+            return Response(journal.data)
+        return Response(journal.error,status=status.HTTP_400_BAD_REQUEST)
 
 
 class JournalSearch(APIView):
+    
     serializer_class = JournalsSerializer
     def get(self,request,search,format=None):
         # start_search = JournalsInfo.objects.filter("journal_name_startwith"=search)
@@ -240,14 +327,14 @@ class JournalSearch(APIView):
                 response = {
                 "ret":1,
                 "msg":"success",
-                "journal_list":[]
+                "data":[]
                 }
                 return Response(response)
         else:
             response = {
                 "ret":1,
                 "msg":"success",
-                "journal_list":[]
+                "data":[]
             }
             journal_list = []
             for journal in contain_search:
@@ -258,7 +345,7 @@ class JournalSearch(APIView):
                 journal_dict["property"] = [journal.journal_b_sub,"影响因子："+ str(journal.journal_index)]
                 journal_dict["rate"] = ["JCR: "+ str(journal.journal_jcr),"CCF: "+ str(journal.journal_ccf)]
                 journal_list.append(journal_dict)
-            response["journal_list"] = journal_list
+            response["data"] = journal_list
 
             return Response(response)
 

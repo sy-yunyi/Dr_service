@@ -83,14 +83,14 @@ class JournalsInfo(models.Model):
     journal_sci = models.CharField(max_length = 30)
     journal_ccf = models.CharField(max_length = 30)
     journal_accept = models.CharField(max_length = 50)
-    journal_oa = models.BooleanField()
+    journal_oa = models.CharField(max_length=10)
 
-    journal_index = models.FloatField()
-    journal_h_index = models.FloatField()
-    journal_total_index = models.IntegerField()
-    journal_index_self = models.FloatField()
+    journal_index = models.CharField(max_length=50)
+    journal_h_index = models.CharField(max_length=50)
+    journal_total_index = models.CharField(max_length=50)
+    journal_index_self = models.CharField(max_length=40)
     journal_period = models.CharField(max_length=50)
-    journal_papers = models.IntegerField()
+    journal_papers = models.CharField(max_length=10)
 
     created = models.DateTimeField(auto_now_add=True)
     journal_search_num = models.IntegerField()
@@ -106,4 +106,21 @@ class JournalsInfo(models.Model):
         verbose_name_plural = 'JournalsInfos'
 
 
+class IndexInfo(models.Model):
+    issn = models.CharField(max_length=10)
+    year = models.CharField(max_length=10)
+    index_num = models.CharField(max_length=10)
+
+    created = models.DateTimeField(auto_now_add=True)
+
+    exer = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.issn
+    
+    class Meta:
+        db_table = ""
+        managed = True
+        verbose_name = "IndexInfo"
+        verbose_name_plural="IndexInfos"
 
