@@ -15,6 +15,7 @@ from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.pagination import LimitOffsetPagination
 from django.views.decorators.http import require_http_methods
 from .models import CCFInfo,ConferenceInfo,JournalsInfo
 from .serializers import CCFInfoSerializer,ConferenceSerializer,JournalsSerializer
@@ -22,6 +23,7 @@ from django.db.models import Count
 from rest_framework import generics,status
 from django.http import Http404
 from .filter import JournalsFilter
+from datetime import datetime
 # Create your views here.
 import json
 import pdb
@@ -40,26 +42,54 @@ def api_root(request, format=None):
         "journals":reverse("journals",request=request,format=format)
     })
 
+
+class MyPagination(LimitOffsetPagination):
+    #默认显示的个数
+    default_limit = 2
+    #当前的位置
+    offset_query_param = "offset"
+    #通过limit改变默认显示的个数
+    limit_query_param = "limit"
+    #一页最多显示的个数
+    max_limit = 10
+
 class CCFInfoList(generics.ListCreateAPIView):
     serializer_class = CCFInfoSerializer
-    def list(self,request):
-        # queryset = CCFInfo.objects.all()
+    
+    def list(self,request,type = None):
         response = {
-            'ret': 1,
-            'ccf_list': [],
-            "sub_list":[],
-            'msg': 'success',
-            'total': ''
+            'ret': 0,
+            'data':[],
+            'msg': '',
         }
-        ccf_info = CCFInfo.objects.all()
+        # queryset = CCFInfo.objects.all()
         sub_info = CCFInfo.objects.values("subject").annotate(Count("subject"))
-        ccf_list = []
-        sub_list = []
-        for sub in sub_info:
-            sub_list.append(sub["subject"])
-            ccf_list.append([CCFInfoSerializer(ccf_info.filter(subject=sub["subject"],category="期刊"), many=True).data,CCFInfoSerializer(ccf_info.filter(subject=sub["subject"],category="会议"), many=True).data])      
-        response['ccf_list'] = ccf_list
-        response['sub_list'] = sub_list
+        ccf_info = CCFInfo.objects.all()
+        
+        if type=="conference":
+            data_l = []
+            for sub in sub_info:
+                sub_dict = {}
+                sub_dict["subject_name"]=(sub["subject"])
+                sub_dict["list"]=CCFInfoSerializer(ccf_info.filter(subject=sub["subject"],category="会议"), many=True).data
+                data_l.append(sub_dict)
+            response['data'] = data_l
+            response["ret"] = 1
+            response["msg"] = "success"
+        elif type == "journal":
+            
+            data_l = []
+            for sub in sub_info:
+                sub_dict = {}
+                sub_dict["subject_name"]=(sub["subject"])
+                sub_dict["list"]=CCFInfoSerializer(ccf_info.filter(subject=sub["subject"],category="期刊"), many=True).data
+                response['data'].append(sub_dict)
+            response["ret"] = 1
+            response["msg"] = "success"
+        else:
+            response["ret"] = 0
+            response["msg"] = "failed"
+
         return Response(response)
 
 class CCFJournalInfo(APIView):
@@ -83,7 +113,6 @@ class CCFJournalInfo(APIView):
             response["data"]=dict(data1,**data2)
             return Response(response)
 
-            
 
         # ccf = CCFInfo.objects.get(full_name_u=journal_name)
         
@@ -96,8 +125,12 @@ class ConferenceList(APIView):
 
     serializer_class = ConferenceSerializer
     def get(self,request,format=None):
-        conferences = ConferenceInfo.objects.all()
-        con_serializer = ConferenceSerializer(conferences,many=True)
+        
+        conferences = ConferenceInfo.objects.order_by("con_paper_deadline")
+
+        page=MyPagination()
+        page_list=page.paginate_queryset(conferences,request,view=self)
+        con_serializer = ConferenceSerializer(page_list,many=True)
         return Response(con_serializer.data)
     
     def post(self,request,format=None):
@@ -184,6 +217,16 @@ class ConferenceInfoDetail(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+class ConferenceHotList(APIView):
+    serializer_class = ConferenceSerializer
+    def get(self,request,format=None):
+        conferences = ConferenceInfo.objects.filter(con_paper_deadline__gt=datetime.now()).order_by("con_paper_deadline")
+        
+        page=MyPagination()
+        page_list=page.paginate_queryset(conferences,request,view=self)
+        con_serializer = ConferenceSerializer(conferences,many=True)
+        return Response(con_serializer.data)
+
 
 class JournalsHotList(APIView):
 
@@ -219,13 +262,15 @@ class JournalInfoList(APIView):
     def get(self,request,format=None):
         try:
             journal_info = JournalsInfo.objects.all()
+            page=MyPagination()
+            page_list=page.paginate_queryset(journal_info,request,view=self)
             response = {
             'ret': 1,
             'data': [],
             'msg': 'success',
             'total': ''}
             journal_list = []
-            for journal in journal_info:
+            for journal in page_list:
                 journal_dict = {}
                 journal_dict["journal_id"] = journal.id
                 journal_dict["fullName"] = journal.journal_name
@@ -253,13 +298,15 @@ class JournalsSubList(APIView):
     def get(self,request,sub,format=None):
         try:
             journal_info = JournalsInfo.objects.filter(journal_b_sub=sub)
+            page=MyPagination()
+            page_list=page.paginate_queryset(journal_info,request,view=self)
             response = {
             'ret': 1,
             'data': [],
             'msg': 'success',
             'total': ''}
             journal_list = []
-            for journal in journal_info:
+            for journal in page_list:
                 journal_dict = {}
                 journal_dict["journal_id"] = journal.id
                 journal_dict["fullName"] = journal.journal_name

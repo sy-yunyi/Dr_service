@@ -24,6 +24,10 @@ class CCFInfo(models.Model):
     subject = models.CharField(max_length=100)
     category = models.CharField(max_length=20)
 
+    con_home = models.CharField(max_length=200)
+    ccf_delay = models.CharField(max_length=50)
+    ccf_index = models.CharField(max_length=20)
+
     where = models.CharField(max_length=200)
     when = models.CharField(max_length=200)
     paper_deadline = models.CharField(max_length=50)
@@ -42,16 +46,24 @@ class CCFInfo(models.Model):
         verbose_name_plural = 'CCFInfos'
 
 class ConferenceInfo(models.Model):
-    con_name = models.CharField(max_length=100)
+    con_name = models.CharField(max_length=500)
     con_sname = models.CharField(max_length=20)
-    con_classes = models.CharField(max_length=50)
+    con_classes = models.CharField(max_length=50)  
 
+    con_home = models.CharField(max_length=200)   # 官网
     con_where = models.CharField(max_length=200)
     con_when = models.CharField(max_length=200)
     con_paper_deadline = models.CharField(max_length=100)
     con_notification = models.CharField(max_length=100) 
-    con_index = models.CharField(max_length=20)
+    con_index = models.CharField(max_length=20) #届数
     con_cfp = models.TextField()
+    con_delay = models.CharField(max_length=50)
+
+    con_rank1 = models.CharField(max_length=10)  #CCF
+    con_rank2 = models.CharField(max_length=10)
+    con_rank3 = models.CharField(max_length = 10)
+    con_rank4 = models.CharField(max_length=10)
+    con_rank5 = models.CharField(max_length = 10)
 
     created = models.DateTimeField(auto_now_add=True)
     con_serach_num = models.IntegerField()
@@ -95,6 +107,11 @@ class JournalsInfo(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     journal_search_num = models.IntegerField()
     journal_hot = models.BooleanField()
+
+    journal_rank1 = models.CharField(max_length=10)
+    journal_rank2 = models.CharField(max_length=10)
+    journal_rank3 = models.CharField(max_length=10)
+    journal_rank4 = models.CharField(max_length=10)
 
     def __str__(self):
         return self.journal_name

@@ -12,9 +12,10 @@ from . import views
 
 
 urlpatterns = [
-    path('ccf_info',views.CCFInfoList.as_view(),name="ccf_list"),
+    path('ccf_info/<type>',views.CCFInfoList.as_view(),name="ccf_list"),
     path("apis",views.api_root),
     path("conferences/",views.ConferenceList.as_view(),name="conference_list"),
+    path("conferences/hot/",views.ConferenceHotList.as_view(),name="conference_hot"),
     path("conference/",views.ConferenceInfoDetail.as_view(),name="conference_info"),
     path("journals/hot",views.JournalsHotList.as_view(),name="journals_hot"),
     path("journals/<sub>",views.JournalsSubList.as_view(),name='journals_sub'),
