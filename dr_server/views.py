@@ -24,6 +24,7 @@ from rest_framework import generics,status
 from django.http import Http404
 from .filter import JournalsFilter
 from datetime import datetime
+from django.db.models import Q
 # Create your views here.
 import json
 import pdb
@@ -32,7 +33,7 @@ import pdb
 @api_view(['GET'])
 def api_root(request, format=None):
     return Response({
-        'ccf': reverse('ccf_list', request=request, format=format),
+        'ccf': reverse('ccf_list', request=request, kwargs={'type':'conference'},format=format),
         'conferences': reverse('conference_list', request=request, format=format),
         "conference_info":reverse("conference_info",request=request,format=format),
         "journals_hot":reverse('journals_hot',request=request,format=format),
@@ -292,18 +293,45 @@ class JournalInfoList(APIView):
             return Response(jou_serializer.data,status=status.HTTP_201_CREATED)
         pdb.set_trace()
         return Response("error",status=status.HTTP_400_BAD_REQUEST)
+    
+    def put(self,request,format=None):
+        """
+        通过ID，更新期刊信息
+        """
+        jou_id = self.request.query_params.get('id', None)
+        jou_info = JournalsInfo.objects.filter(id=jou_id)
+        
+        jou_ser = ConferenceSerializer(jou_info,request.data)
+
+        if jou_ser.is_valid():
+            jou_ser.save()
+            return Response(jou_ser.data)
+        return Response(jou_ser.error,status=status.HTTP_400_BAD_REQUEST)
         
 class JournalsSubList(APIView):
 
     def get(self,request,sub,format=None):
         try:
             journal_info = JournalsInfo.objects.filter(journal_b_sub=sub)
+            journal_ssub = journal_info.values("journal_s_sub").annotate(Count("journal_s_sub"))
+            
+            jou_index = self.request.query_params.get('index', None)
+            jou_sub_list = self.request.query_params.get('subList', None)
+            # pdb.set_trace()
+            if jou_index and jou_sub_list:
+                journal_info = journal_info.filter(Q(journal_index__range=(jou_index.split(",")[0][1:],jou_index.split(",")[1][:-1])) & Q(journal_s_sub__in=jou_sub_list.split(",")))
+            elif jou_index:
+                journal_info = journal_info.filter(journal_index__range=(jou_index.split(",")[0][1:],jou_index.split(",")[1][:-1]))
+            elif jou_sub_list:
+                journal_info = journal_info.filter(journal_s_sub__in=jou_sub_list.split(","))
+            
             page=MyPagination()
             page_list=page.paginate_queryset(journal_info,request,view=self)
             response = {
-            'ret': 1,
+            'ret': 0,
             'data': [],
-            'msg': 'success',
+            "s_sub_list":[],
+            'msg': '',
             'total': ''}
             journal_list = []
             for journal in page_list:
@@ -315,6 +343,9 @@ class JournalsSubList(APIView):
                 journal_dict["rate"] = ["JCR: "+ str(journal.journal_jcr),"CCF: "+ str(journal.journal_ccf)]
                 journal_list.append(journal_dict)
             response["data"] = journal_list
+            response["s_sub_list"] = [su["journal_s_sub"] for su in journal_ssub]
+            response["ret"] = 1
+            response["msg"] = "success"
         except JournalsInfo.DoesNotExist:
             raise Http404
         else:
