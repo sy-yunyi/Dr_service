@@ -232,7 +232,7 @@ class ConferenceHotList(APIView):
         conferences = ConferenceInfo.objects.filter(con_paper_deadline__gt=datetime.now()).order_by("con_paper_deadline")
         
         page=MyPagination()
-        page_list=page.paginate_queryset(conferences,request,view=self)
+        conferences=page.paginate_queryset(conferences,request,view=self)
         con_serializer = ConferenceSerializer(conferences,many=True)
         return Response(con_serializer.data)
 
