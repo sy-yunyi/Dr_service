@@ -128,6 +128,14 @@ class ConferenceList(APIView):
     def get(self,request,format=None):
         
         conferences = ConferenceInfo.objects.order_by("con_paper_deadline")
+        con_ccf = self.request.query_params.get('ccf', None)
+        con_onTime = self.request.query_params.get('onTime', None)
+        if con_ccf and con_onTime:
+            conferences = conferences.filter(Q(con_rank1__in=['A','B','C']) & Q(con_paper_deadline__gt=datetime.now()))
+        elif con_ccf:
+            conferences = conferences.filter(con_rank1__in=['A','B','C'])
+        elif con_onTime:
+            conferences = conferences.filter(con_paper_deadline__gt=datetime.now())
 
         page=MyPagination()
         page_list=page.paginate_queryset(conferences,request,view=self)
@@ -230,9 +238,7 @@ class ConferenceHotList(APIView):
 
 
 class JournalsHotList(APIView):
-
     # def get_journals_list(self):
-
     def get(self,request,format=None):
         try:
             journal_info = JournalsInfo.objects.filter(journal_hot=True)
