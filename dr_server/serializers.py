@@ -4,8 +4,8 @@ from .models import CCFInfo,ConferenceInfo,JournalsInfo
 class CCFInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = CCFInfo
-        fields = ("short_name","full_name","full_name_u","published","url_link","classes","subject","category","where","when","paper_deadline","notification")
-    
+        # fields = ("short_name","full_name","full_name_u","published","url_link","classes","subject","category","where","when","paper_deadline","notification")
+        fields = "__all__"
 
 class ConferenceSerializer(serializers.ModelSerializer):
     class Meta:
