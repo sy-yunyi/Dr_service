@@ -230,11 +230,28 @@ class ConferenceHotList(APIView):
     serializer_class = ConferenceSerializer
     def get(self,request,format=None):
         conferences = ConferenceInfo.objects.filter(con_paper_deadline__gt=datetime.now()).order_by("con_paper_deadline")
-        
+        response = {
+            'ret': 1,
+            'data': [],
+            'msg': 'success',
+            'total': ''}
         page=MyPagination()
         conferences=page.paginate_queryset(conferences,request,view=self)
-        con_serializer = ConferenceSerializer(conferences,many=True)
-        return Response(con_serializer.data)
+        confer_list = []
+        for conf in conferences:
+            confer_dict = {}
+            confer_dict["journal_id"] = conf.id
+            confer_dict["fullName"] = conf.con_name
+            confer_dict["shortName"] = conf.con_sname
+            confer_dict["property"] = ["截止日期："+str(conf.con_paper_deadline),"地点："+ str(conf.con_where)]
+            if conf.con_rank1!=" ":
+                confer_dict["rate"] = ["CCF: "+ str(conf.con_rank1)]
+            else:
+                confer_dict["rate"] =[]
+            confer_list.append(confer_dict)
+        response["data"] = confer_list
+        # con_serializer = ConferenceSerializer(conferences,many=True)
+        return Response(response)
 
 
 class JournalsHotList(APIView):
