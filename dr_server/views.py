@@ -318,8 +318,20 @@ class JournalsSubList(APIView):
 
     def get(self,request,sub,format=None):
         try:
-            journal_info = JournalsInfo.objects.filter(journal_b_sub=sub)
+            search_key = self.request.query_params.get("qk",None)
+            if sub=="all":
+                if search_key:
+                    journal_info = JournalsInfo.objects.filter(Q(journal_b_sub=sub) & (Q(journal_name__contains=search_key)|Q(journal_short_name__contains=search_key)))
+                else:
+                    journal_info = JournalsInfo.objects.all()
+            else:
+                if search_key:
+                    journal_info = JournalsInfo.objects.filter(Q(journal_b_sub=sub) & (Q(journal_name__contains=search_key)|Q(journal_short_name__contains=search_key)))
+                else:
+                    journal_info = JournalsInfo.objects.filter(journal_b_sub=sub)
             journal_ssub = journal_info.values("journal_s_sub").annotate(Count("journal_s_sub"))
+            journal_bsub = journal_info.values("journal_b_sub").annotate(Count("journal_b_sub"))
+
             
             jou_index = self.request.query_params.get('index', None)
             jou_sub_list = self.request.query_params.get('subList', None)
@@ -337,6 +349,7 @@ class JournalsSubList(APIView):
             'ret': 0,
             'data': [],
             "s_sub_list":[],
+            "b_sub_list":[],
             'msg': '',
             'total': ''}
             journal_list = []
@@ -350,6 +363,7 @@ class JournalsSubList(APIView):
                 journal_list.append(journal_dict)
             response["data"] = journal_list
             response["s_sub_list"] = [su["journal_s_sub"] for su in journal_ssub]
+            response["b_sub_list"] = [su["journal_b_sub"] for su in journal_bsub]
             response["ret"] = 1
             response["msg"] = "success"
         except JournalsInfo.DoesNotExist:
@@ -403,18 +417,17 @@ class JournalSearch(APIView):
         # start_search = JournalsInfo.objects.filter("journal_name_startwith"=search)
         # start_search_s = JournalsInfo.objects.filter("journal_short_name_startwith"=search)
         try:
-            contain_search = JournalsInfo.objects.filter(journal_name__contains=search)
+            contain_search = JournalsInfo.objects.filter(Q(journal_name__contains=search)|Q(journal_short_name__contains=search))
         except JournalsInfo.DoesNotExist:
-            try:
-                contain_search_s = JournalsInfo.objects.filter(journal_short_name__contains=search)
-            except JournalsInfo.DoesNotExist:
-                response = {
-                "ret":1,
-                "msg":"success",
-                "data":[]
-                }
-                return Response(response)
+            response = {
+            "ret":1,
+            "msg":"success",
+            "data":[]
+            }
+            return Response(response)
         else:
+            page=MyPagination()
+            contain_search=page.paginate_queryset(contain_search,request,view=self)
             response = {
                 "ret":1,
                 "msg":"success",
