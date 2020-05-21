@@ -240,14 +240,19 @@ class ConferenceHotList(APIView):
         confer_list = []
         for conf in conferences:
             confer_dict = {}
-            confer_dict["journal_id"] = conf.id
+            confer_dict["confer_id"] = conf.id
             confer_dict["fullName"] = conf.con_name
             confer_dict["shortName"] = conf.con_sname
             confer_dict["property"] = ["截止日期："+str(conf.con_paper_deadline),"地点："+ str(conf.con_where)]
-            if conf.con_rank1!=" ":
-                confer_dict["rate"] = ["CCF: "+ str(conf.con_rank1)]
+            dy=conf.con_delay if conf.con_delay!=" " else ""
+            if conf.con_rank1!=" " and conf.con_delay!=" ":
+                confer_dict["rate"] = ["CCF: "+ str(conf.con_rank1),conf.con_delay]
+            elif conf.con_rank1!=" ":
+                confer_dict["rate"] =["CCF: "+ str(conf.con_rank1)]
+            elif conf.con_delay!=" ":
+                confer_dict["rate"] =[conf.con_delay]
             else:
-                confer_dict["rate"] =[]
+                confer_dict["rate"] = []
             confer_list.append(confer_dict)
         response["data"] = confer_list
         # con_serializer = ConferenceSerializer(conferences,many=True)
