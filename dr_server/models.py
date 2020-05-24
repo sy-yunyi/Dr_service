@@ -97,7 +97,7 @@ class JournalsInfo(models.Model):
     journal_accept = models.CharField(max_length = 50)
     journal_oa = models.CharField(max_length=10)
 
-    journal_index = models.CharField(max_length=50)
+    journal_index = models.DecimalField(max_digits=5, decimal_places=5)
     journal_h_index = models.CharField(max_length=50)
     journal_total_index = models.CharField(max_length=50)
     journal_index_self = models.CharField(max_length=40)
