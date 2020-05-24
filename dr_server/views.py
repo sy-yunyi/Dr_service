@@ -370,7 +370,7 @@ class JournalsSubList(APIView):
             search_key = self.request.query_params.get("qk",None)
             if sub=="all":
                 if search_key:
-                    journal_info = JournalsInfo.objects.filter(Q(journal_b_sub=sub) & (Q(journal_name__contains=search_key)|Q(journal_short_name__contains=search_key)))
+                    journal_info = JournalsInfo.objects.filter((Q(journal_name__contains=search_key)|Q(journal_short_name__contains=search_key)))
                 else:
                     journal_info = JournalsInfo.objects.all()
             else:
