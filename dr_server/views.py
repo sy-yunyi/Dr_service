@@ -142,6 +142,7 @@ class ConferenceList(APIView):
             'msg': 'success',
             'total': ''}
         page=MyPagination()
+        response["total"]=page.get_count(conferences)
         conferences=page.paginate_queryset(conferences,request,view=self)
 
         confer_list = []
@@ -260,6 +261,7 @@ class ConferenceHotList(APIView):
             'msg': 'success',
             'total': ''}
         page=MyPagination()
+        response["total"]=page.get_count(conferences)
         conferences=page.paginate_queryset(conferences,request,view=self)
         confer_list = []
         for conf in conferences:
@@ -314,14 +316,16 @@ class JournalInfoList(APIView):
 
     def get(self,request,format=None):
         try:
-            journal_info = JournalsInfo.objects.all()
-            page=MyPagination()
-            page_list=page.paginate_queryset(journal_info,request,view=self)
             response = {
             'ret': 1,
             'data': [],
             'msg': 'success',
             'total': ''}
+            journal_info = JournalsInfo.objects.all()
+            page=MyPagination()
+            response["total"]=page.get_count(journal_info)
+            page_list=page.paginate_queryset(journal_info,request,view=self)
+            
             journal_list = []
             for journal in page_list:
                 journal_dict = {}
@@ -343,7 +347,6 @@ class JournalInfoList(APIView):
         if jou_serializer.is_valid():
             jou_serializer.save()
             return Response(jou_serializer.data,status=status.HTTP_201_CREATED)
-        pdb.set_trace()
         return Response("error",status=status.HTTP_400_BAD_REQUEST)
     
     def put(self,request,format=None):
@@ -381,7 +384,6 @@ class JournalsSubList(APIView):
             
             jou_index = self.request.query_params.get('index', None)
             jou_sub_list = self.request.query_params.get('subList', None)
-            # pdb.set_trace()
             if jou_index and jou_sub_list:
                 journal_info = journal_info.filter(Q(journal_index__range=(jou_index.split(",")[0][1:],jou_index.split(",")[1][:-1])) & Q(journal_s_sub__in=jou_sub_list.split(",")))
             elif jou_index:
@@ -389,8 +391,6 @@ class JournalsSubList(APIView):
             elif jou_sub_list:
                 journal_info = journal_info.filter(journal_s_sub__in=jou_sub_list.split(","))
             
-            page=MyPagination()
-            page_list=page.paginate_queryset(journal_info,request,view=self)
             response = {
             'ret': 0,
             'data': [],
@@ -398,6 +398,10 @@ class JournalsSubList(APIView):
             "b_sub_list":[],
             'msg': '',
             'total': ''}
+            page=MyPagination()
+            response["total"]=page.get_count(journal_info)
+            page_list=page.paginate_queryset(journal_info,request,view=self)
+            
             journal_list = []
             for journal in page_list:
                 journal_dict = {}
@@ -462,23 +466,29 @@ class JournalSearch(APIView):
     def get(self,request,search,format=None):
         # start_search = JournalsInfo.objects.filter("journal_name_startwith"=search)
         # start_search_s = JournalsInfo.objects.filter("journal_short_name_startwith"=search)
+        
+        response = {
+                "ret":1,
+                "msg":"success",
+                "data":[],
+                "total":0
+            }
         try:
             contain_search = JournalsInfo.objects.filter(Q(journal_name__contains=search)|Q(journal_short_name__contains=search))
         except JournalsInfo.DoesNotExist:
             response = {
             "ret":1,
             "msg":"success",
-            "data":[]
+            "data":[],
+            "total":0
             }
             return Response(response)
         else:
+
             page=MyPagination()
+            response["total"]=page.get_count(contain_search)
             contain_search=page.paginate_queryset(contain_search,request,view=self)
-            response = {
-                "ret":1,
-                "msg":"success",
-                "data":[]
-            }
+            
             journal_list = []
             for journal in contain_search:
                 journal_dict={}
