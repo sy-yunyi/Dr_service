@@ -136,11 +136,35 @@ class ConferenceList(APIView):
             conferences = conferences.filter(con_rank1__in=['A','B','C'])
         elif con_onTime:
             conferences = conferences.filter(con_paper_deadline__gt=datetime.now())
-
+        response = {
+            'ret': 1,
+            'data': [],
+            'msg': 'success',
+            'total': ''}
         page=MyPagination()
-        page_list=page.paginate_queryset(conferences,request,view=self)
-        con_serializer = ConferenceSerializer(page_list,many=True)
-        return Response(con_serializer.data)
+        conferences=page.paginate_queryset(conferences,request,view=self)
+
+        confer_list = []
+        for conf in conferences:
+            confer_dict = {}
+            confer_dict["confer_id"] = conf.id
+            confer_dict["fullName"] = conf.con_name
+            confer_dict["shortName"] = conf.con_sname
+            confer_dict["property"] = ["截止日期："+str(conf.con_paper_deadline),"地点："+ str(conf.con_where)]
+            dy=conf.con_delay if conf.con_delay!=" " else ""
+            if conf.con_rank1!=" " and conf.con_delay!=" ":
+                confer_dict["rate"] = ["CCF: "+ str(conf.con_rank1),conf.con_delay]
+            elif conf.con_rank1!=" ":
+                confer_dict["rate"] =["CCF: "+ str(conf.con_rank1)]
+            elif conf.con_delay!=" ":
+                confer_dict["rate"] =[conf.con_delay]
+            else:
+                confer_dict["rate"] = []
+            confer_list.append(confer_dict)
+        response["data"] = confer_list
+
+        # con_serializer = ConferenceSerializer(page_list,many=True)
+        return Response(response)
     
     def post(self,request,format=None):
         con_serializer = ConferenceSerializer(data=request.data)
