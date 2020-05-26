@@ -368,7 +368,8 @@ class JournalsSubList(APIView):
     def get(self,request,sub,format=None):
         try:
             search_key = self.request.query_params.get("qk",None)
-            search_key = search_key.upper()
+            if search_key:
+                search_key = search_key.upper()
             if sub=="all":
                 if search_key:
                     journal_info = JournalsInfo.objects.filter(Q(journal_short_name__contains=search_key)|Q(journal_name_u__contains=search_key))
@@ -475,6 +476,7 @@ class JournalSearch(APIView):
                 "total":0
             }
         try:
+
             search = search.upper()
             contain_search = JournalsInfo.objects.filter(Q(journal_name_u__contains=search)|Q(journal_short_name__contains=search))
         except JournalsInfo.DoesNotExist:
