@@ -48,22 +48,22 @@ class CCFInfo(models.Model):
 class ConferenceInfo(models.Model):
     con_name = models.CharField(max_length=500)
     con_sname = models.CharField(max_length=20)
-    con_classes = models.CharField(max_length=50)  
+    con_classes = models.CharField(max_length=50,blank=True)  
 
-    con_home = models.CharField(max_length=200)   # 官网
-    con_where = models.CharField(max_length=200)
-    con_when = models.CharField(max_length=200)
-    con_paper_deadline = models.CharField(max_length=100)
-    con_notification = models.CharField(max_length=100) 
-    con_index = models.CharField(max_length=20) #届数
-    con_cfp = models.TextField()
-    con_delay = models.CharField(max_length=50)
+    con_home = models.CharField(max_length=200,blank=True)   # 官网
+    con_where = models.CharField(max_length=200,blank=True)
+    con_when = models.CharField(max_length=200,blank=True)
+    con_paper_deadline = models.CharField(max_length=100,blank=True)
+    con_notification = models.CharField(max_length=100,blank=True) 
+    con_index = models.CharField(max_length=20,blank=True) #届数
+    con_cfp = models.TextField(blank=True)
+    con_delay = models.CharField(max_length=50,blank=True)
 
-    con_rank1 = models.CharField(max_length=10)  #CCF
-    con_rank2 = models.CharField(max_length=10)
-    con_rank3 = models.CharField(max_length = 10)
-    con_rank4 = models.CharField(max_length=10)
-    con_rank5 = models.CharField(max_length = 10)
+    con_rank1 = models.CharField(max_length=10,blank=True)  #CCF
+    con_rank2 = models.CharField(max_length=10,blank=True)
+    con_rank3 = models.CharField(max_length = 10,blank=True)
+    con_rank4 = models.CharField(max_length=10,blank=True)
+    con_rank5 = models.CharField(max_length = 10,blank=True)
 
     created = models.DateTimeField(auto_now_add=True)
     con_serach_num = models.IntegerField()

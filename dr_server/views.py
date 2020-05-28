@@ -171,8 +171,9 @@ class ConferenceList(APIView):
         con_serializer = ConferenceSerializer(data=request.data)
         if con_serializer.is_valid():
             con_serializer.save()
-            return Response(con_serializers.data,status=status.HTTP_201_CREATED)
-        return Response(con_serializer.error,status=status.HTTP_400_BAD_REQUEST)
+            return Response(con_serializer.data,status=status.HTTP_201_CREATED)
+        rep = {"status":0}
+        return Response(rep,status=status.HTTP_400_BAD_REQUEST)
 
 class ConferenceInfoDetail(APIView):
     """
@@ -183,7 +184,7 @@ class ConferenceInfoDetail(APIView):
         通过会议全称获取会议信息
         """
         try:
-            return ConferenceInfo.objects.get(con_name=con_name)
+            return ConferenceInfo.objects.filter(con_name=con_name).first()
         except ConferenceInfo.DoesNotExist:
             return 0
 
@@ -192,7 +193,7 @@ class ConferenceInfoDetail(APIView):
         通过会议简称获取会议信息
         """
         try:
-            return ConferenceInfo.objects.get(con_sname=con_sname)
+            return ConferenceInfo.objects.filter(con_sname=con_sname).first()
         except ConferenceInfo.DoesNotExist:
             return 0
 
@@ -201,7 +202,7 @@ class ConferenceInfoDetail(APIView):
         通过会议ID获取会议信息
         """
         try:
-            return ConferenceInfo.objects.get(id=con_id)
+            return ConferenceInfo.objects.filter(id=con_id).first()
         except ConferenceInfo.DoesNotExist:
             return 0
 
@@ -209,19 +210,26 @@ class ConferenceInfoDetail(APIView):
         """
         通过名称，简称，ID 获取会议信息
         """
+        # pdb.set_trace()
         con_name = self.request.query_params.get('con_name', None)
         con_sname = self.request.query_params.get('con_sname', None)
         con_id = self.request.query_params.get('id', None)
         if con_name:
             conf = self.get_object_by_name(con_name)
+            if conf ==0 :
+                raise Http404
             conf_ser = ConferenceSerializer(conf)
             return Response(conf_ser.data)
         elif con_sname:
-            conf = self.get_object_by_name(con_sname)
+            conf = self.get_object_by_sname(con_sname)
+            if conf ==0 :
+                raise Http404
             conf_ser = ConferenceSerializer(conf)
             return Response(conf_ser.data)
         elif con_id:
             conf = self.get_object_by_id(con_id)
+            if conf ==0 :
+                raise Http404
             conf_ser = ConferenceSerializer(conf)
             return Response(conf_ser.data)
         else:
@@ -234,12 +242,12 @@ class ConferenceInfoDetail(APIView):
         """
         con_id = self.request.query_params.get('id', None)
         conf = self.get_object_by_id(con_id)
-        conf_ser = ConferenceSerializer(conf,request.data)
-
+        conf_ser = ConferenceSerializer(conf,data=request.data)
         if conf_ser.is_valid():
             conf_ser.save()
-            return Response(conf_ser.data)
-        return Response(conf_ser.error,status=status.HTTP_400_BAD_REQUEST)
+            return Response(conf_ser.data,status=status.HTTP_201_CREATED)
+        rep = {"status":0}
+        return Response(rep,status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self,request,format=None):
         """
