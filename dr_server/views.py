@@ -424,7 +424,12 @@ class JournalsSubList(APIView):
                 journal_info = journal_info.filter(journal_index__range=(jou_index.split(",")[0][1:],jou_index.split(",")[1][:-1]))
             elif jou_sub_list:
                 journal_info = journal_info.filter(journal_s_sub__in=jou_sub_list.split(","))
-            
+            order_index = self.request.query_params.get('order', None)
+            if order_index=='1':  # 升序
+                journal_info = journal_info.order_by("journal_index")
+            elif order_index=='0' or order_index is None:
+                journal_info = journal_info.order_by("-journal_index")
+
             response = {
             'ret': 0,
             'data': [],
@@ -444,9 +449,9 @@ class JournalsSubList(APIView):
                 journal_dict["shortName"] = journal.journal_short_name
                 journal_dict["property"] = [journal.journal_b_sub,"影响因子："+ str(journal.journal_index)]
                 if str(journal.journal_ccf) !="暂无":
-                    journal_dict["rate"] = ["JCR: "+ str(journal.journal_jcr),"CCF: "+ str(journal.journal_ccf)]
+                    journal_dict["rate"] = ["JCR: "+ str(journal.journal_q),"CCF: "+ str(journal.journal_ccf)]
                 else:
-                    journal_dict["rate"] = ["JCR: "+ str(journal.journal_jcr)]
+                    journal_dict["rate"] = ["JCR: "+ str(journal.journal_q)]
 
                 journal_list.append(journal_dict)
             response["data"] = journal_list
