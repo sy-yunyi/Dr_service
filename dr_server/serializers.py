@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CCFInfo,ConferenceInfo,JournalsInfo
+from .models import CCFInfo,ConferenceInfo,JournalsInfo,IndexInfo
 
 class CCFInfoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -18,3 +18,8 @@ class JournalsSerializer(serializers.ModelSerializer):
     class Meta:
         model = JournalsInfo
         fields = "__all__"
+
+class IndexsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=IndexInfo
+        fields="__all__"

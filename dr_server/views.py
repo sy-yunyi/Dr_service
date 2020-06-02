@@ -17,8 +17,8 @@ from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.pagination import LimitOffsetPagination
 from django.views.decorators.http import require_http_methods
-from .models import CCFInfo,ConferenceInfo,JournalsInfo
-from .serializers import CCFInfoSerializer,ConferenceSerializer,JournalsSerializer
+from .models import CCFInfo,ConferenceInfo,JournalsInfo,IndexInfo
+from .serializers import CCFInfoSerializer,ConferenceSerializer,JournalsSerializer,IndexsSerializer
 from django.db.models import Count
 from rest_framework import generics,status
 from django.http import Http404
@@ -40,8 +40,23 @@ def api_root(request, format=None):
         "journals_sub":reverse("journals_sub",request=request,kwargs={'sub':"管理科学"},format=format),
         "journals_id":reverse("journals_id",request=request,kwargs={'jid':1},format=format),
         "journals_sea":reverse("journals_sea",request=request,kwargs={'search':'4OR'},format=format),
-        "journals":reverse("journals",request=request,format=format)
+        "journals":reverse("journals",request=request,format=format),
+        "indexinfo":reverse("indexinfo",request=request,format=format)
     })
+
+@api_view(['GET'])
+def messageNotify(request,format=None):
+    return Response({
+        'ret':1,
+        'data':{
+            "short_message":'Hello',
+            "message":'Hello world'
+        }
+    })
+
+
+
+
 
 
 class MyPagination(LimitOffsetPagination):
@@ -153,9 +168,9 @@ class ConferenceList(APIView):
             confer_dict["shortName"] = conf.con_sname
             confer_dict["property"] = ["截稿日期："+str(conf.con_paper_deadline),"地点："+ str(conf.con_where)]
             dy=conf.con_delay if conf.con_delay!=" " else ""
-            if conf.con_rank1!=" " and conf.con_delay!=" ":
+            if conf.con_rank1!=" " and conf.con_rank1!="暂无" and conf.con_delay!=" ":
                 confer_dict["rate"] = ["CCF: "+ str(conf.con_rank1),conf.con_delay]
-            elif conf.con_rank1!=" ":
+            elif conf.con_rank1!=" " and conf.con_rank1!="暂无":
                 confer_dict["rate"] =["CCF: "+ str(conf.con_rank1)]
             elif conf.con_delay!=" ":
                 confer_dict["rate"] =[conf.con_delay]
@@ -310,7 +325,11 @@ class JournalsHotList(APIView):
                 journal_dict["fullName"] = journal.journal_name
                 journal_dict["shortName"] = journal.journal_short_name
                 journal_dict["property"] = [journal.journal_b_sub,"影响因子："+ str(journal.journal_index)]
-                journal_dict["rate"] = ["JCR: "+ str(journal.journal_jcr),"CCF: "+ str(journal.journal_ccf)]
+                # journal_dict["rate"] = ["JCR: "+ str(journal.journal_jcr),"CCF: "+ str(journal.journal_ccf)]
+                if str(journal.journal_ccf) !="暂无":
+                    journal_dict["rate"] = ["JCR: "+ str(journal.journal_jcr),"CCF: "+ str(journal.journal_ccf)]
+                else:
+                    journal_dict["rate"] = ["JCR: "+ str(journal.journal_jcr)]
                 journal_list.append(journal_dict)
             response["data"] = journal_list
         except JournalsInfo.DoesNotExist:
@@ -341,7 +360,12 @@ class JournalInfoList(APIView):
                 journal_dict["fullName"] = journal.journal_name
                 journal_dict["shortName"] = journal.journal_short_name
                 journal_dict["property"] = [journal.journal_b_sub,"影响因子："+ str(journal.journal_index)]
-                journal_dict["rate"] = ["JCR: "+ str(journal.journal_jcr),"CCF: "+ str(journal.journal_ccf)]
+                # journal_dict["rate"] = ["JCR: "+ str(journal.journal_jcr),"CCF: "+ str(journal.journal_ccf)]
+                if str(journal.journal_ccf) !="暂无":
+                    journal_dict["rate"] = ["JCR: "+ str(journal.journal_jcr),"CCF: "+ str(journal.journal_ccf)]
+                else:
+                    journal_dict["rate"] = ["JCR: "+ str(journal.journal_jcr)]
+
                 journal_list.append(journal_dict)
             response["data"] = journal_list
         except JournalsInfo.DoesNotExist:
@@ -419,7 +443,11 @@ class JournalsSubList(APIView):
                 journal_dict["fullName"] = journal.journal_name
                 journal_dict["shortName"] = journal.journal_short_name
                 journal_dict["property"] = [journal.journal_b_sub,"影响因子："+ str(journal.journal_index)]
-                journal_dict["rate"] = ["JCR: "+ str(journal.journal_jcr),"CCF: "+ str(journal.journal_ccf)]
+                if str(journal.journal_ccf) !="暂无":
+                    journal_dict["rate"] = ["JCR: "+ str(journal.journal_jcr),"CCF: "+ str(journal.journal_ccf)]
+                else:
+                    journal_dict["rate"] = ["JCR: "+ str(journal.journal_jcr)]
+
                 journal_list.append(journal_dict)
             response["data"] = journal_list
             response["s_sub_list"] = [su["journal_s_sub"] for su in journal_ssub]
@@ -448,12 +476,27 @@ class JournalInfoDetial(APIView):
     serializer_class = JournalsSerializer
     # search_fields = ("journal_name","journal_short_name")
     def get(self,request,jid,format=None):
-        journal_info = JournalsInfo.objects.filter(id=jid)
         response = {
             'ret':"1",
             'msg': 'success',
-            'data':' '
+            'data':' ',
+            "year_list":"",
+            "index_list":""
         }
+        journal_info = JournalsInfo.objects.filter(id=jid)
+        jindexs = IndexInfo.objects.filter(issn=journal_info[0].journal_issn)
+       
+        year_list = []
+        index_list = []
+        # pdb.set_trace()
+        for jis in jindexs:
+            year_list.append(jis.year)
+            index_list.append(jis.index_num)
+        response["year_list"] =year_list
+        response["index_list"] = index_list
+
+        response["year_list"] =year_list
+        response["index_list"] = index_list
         response["data"] = JournalsSerializer(journal_info,many=True).data
         return Response(response)
     
@@ -516,6 +559,26 @@ class JournalSearch(APIView):
 
 
 
+class JournalIndex(APIView):
+
+    def get(self,request,format=None):
+        issn = self.request.query_params.get('issn', None)
+        jindexs = IndexInfo.objects.filter(issn=issn)
+        year_list = []
+        index_list = []
+        # pdb.set_trace()
+        for jis in jindexs:
+            year_list.append(jis.year)
+            index_list.append(jis.index_num)
+        # pdb.set_trace()
+        return Response({"data":[year_list,index_list]})
+    
+    def post(self,request,format=None):
+        index_ser = IndexsSerializer(data=request.data)
+        if index_ser.is_valid():
+            index_ser.save()
+            return Response(index_ser.data,status=status.HTTP_201_CREATED)
+        return Response("error",status=status.HTTP_400_BAD_REQUEST)
 
 
 

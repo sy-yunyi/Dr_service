@@ -127,11 +127,11 @@ class JournalsInfo(models.Model):
 class IndexInfo(models.Model):
     issn = models.CharField(max_length=10)
     year = models.CharField(max_length=10)
-    index_num = models.CharField(max_length=10)
+    index_num = models.FloatField()
 
     created = models.DateTimeField(auto_now_add=True)
 
-    exer = models.CharField(max_length=50)
+    exer = models.CharField(max_length=50,blank=True)
 
     def __str__(self):
         return self.issn

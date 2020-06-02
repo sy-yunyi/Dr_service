@@ -22,6 +22,8 @@ urlpatterns = [
     path("journal/<jid>",views.JournalInfoDetial.as_view(),name='journals_id'),
     path("journal/search/<search>",views.JournalSearch.as_view(),name='journals_sea'),
     path("journals",views.JournalInfoList.as_view(),name="journals"),
-    path("CCFJournalInfo/<journal_name>",views.CCFJournalInfo.as_view())
+    path("CCFJournalInfo/<journal_name>",views.CCFJournalInfo.as_view()),
+    path("notify",views.messageNotify),
+    path("journalIndex",views.JournalIndex.as_view(),name="indexinfo")
 
 ]
