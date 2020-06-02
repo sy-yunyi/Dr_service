@@ -362,9 +362,9 @@ class JournalInfoList(APIView):
                 journal_dict["property"] = [journal.journal_b_sub,"影响因子："+ str(journal.journal_index)]
                 # journal_dict["rate"] = ["JCR: "+ str(journal.journal_jcr),"CCF: "+ str(journal.journal_ccf)]
                 if str(journal.journal_ccf) !="暂无":
-                    journal_dict["rate"] = ["JCR: "+ str(journal.journal_jcr),"CCF: "+ str(journal.journal_ccf)]
+                    journal_dict["rate"] = ["JCR: "+ str(journal.journal_q),"CCF: "+ str(journal.journal_ccf)]
                 else:
-                    journal_dict["rate"] = ["JCR: "+ str(journal.journal_jcr)]
+                    journal_dict["rate"] = ["JCR: "+ str(journal.journal_q)]
 
                 journal_list.append(journal_dict)
             response["data"] = journal_list
