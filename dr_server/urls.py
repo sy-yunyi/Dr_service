@@ -24,6 +24,7 @@ urlpatterns = [
     path("journals",views.JournalInfoList.as_view(),name="journals"),
     path("CCFJournalInfo/<journal_name>",views.CCFJournalInfo.as_view()),
     path("notify",views.messageNotify),
+    path("photoInfo",views.dyInfo),
     path("journalIndex",views.JournalIndex.as_view(),name="indexinfo")
 
 ]

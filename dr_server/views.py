@@ -55,6 +55,16 @@ def messageNotify(request,format=None):
     })
 
 
+@api_view(['GET'])
+def dyInfo(request,format=None):
+    return Response({
+        'ret':1,
+        'data':{
+            "background":'https://s1.ax1x.com/2020/06/02/tY7hPe.md.jpg',
+            "appreciation_qr":'https://s1.ax1x.com/2020/06/03/tddFqs.jpg',
+            "dr_qr":'https://s1.ax1x.com/2020/06/03/tddAZn.gif',
+        }
+    })
 
 
 
