@@ -12,7 +12,7 @@ from django.db import models
 
 class CCFInfo(models.Model):
 
-    short_name = models.CharField(max_length=64)
+    short_name = models.CharField(max_length=64,blank=True)
     full_name = models.CharField(max_length=500,blank=True)
 
     full_name_u = models.CharField(max_length=500,default=" ")

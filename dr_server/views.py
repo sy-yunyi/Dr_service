@@ -118,12 +118,14 @@ class CCFInfoList(generics.UpdateAPIView,generics.ListCreateAPIView):
 
         return Response(response)
 
-    def update(self,request,*args,**kwargs):
+    def update(self,request,type=None,*args,**kwargs):
         ccf_name = self.request.query_params.get('name', None)
         ccf_sname = self.request.query_params.get('sname', None)
+        conf1 = None
+        conf2 = None
         if ccf_sname:
             conf1 = CCFInfo.objects.filter(short_name=ccf_sname).first()
-        if ccf_sname:
+        elif ccf_name:
             conf2 = CCFInfo.objects.filter(full_name=ccf_name).first()
         if conf1:
             conf_ser = CCFInfoSerializer(conf1,data=request.data)
