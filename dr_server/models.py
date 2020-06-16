@@ -13,25 +13,25 @@ from django.db import models
 class CCFInfo(models.Model):
 
     short_name = models.CharField(max_length=64)
-    full_name = models.CharField(max_length=500)
+    full_name = models.CharField(max_length=500,blank=True)
 
     full_name_u = models.CharField(max_length=500,default=" ")
 
-    published = models.CharField(max_length=100)
-    url_link = models.CharField(max_length=200)
+    published = models.CharField(max_length=100,blank=True)
+    url_link = models.CharField(max_length=200,blank=True)
 
-    classes = models.CharField(max_length=2)
-    subject = models.CharField(max_length=100)
-    category = models.CharField(max_length=20)
+    classes = models.CharField(max_length=2,blank=True)
+    subject = models.CharField(max_length=100,blank=True)
+    category = models.CharField(max_length=20,blank=True)
 
-    con_home = models.CharField(max_length=200)
-    ccf_delay = models.CharField(max_length=50)
-    ccf_index = models.CharField(max_length=20)
+    con_home = models.CharField(max_length=200,blank=True)
+    ccf_delay = models.CharField(max_length=50,blank=True)
+    ccf_index = models.CharField(max_length=20,blank=True)
 
-    where = models.CharField(max_length=200)
-    when = models.CharField(max_length=200)
-    paper_deadline = models.CharField(max_length=50)
-    notification = models.CharField(max_length=50,default=" ")
+    where = models.CharField(max_length=200,blank=True)
+    when = models.CharField(max_length=200,blank=True)
+    paper_deadline = models.CharField(max_length=50,blank=True)
+    notification = models.CharField(max_length=50,default=" ",blank=True)
 
     created = models.DateTimeField(auto_now_add=True)
 

@@ -14,6 +14,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from rest_framework.views import APIView
+from rest_framework import mixins
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.pagination import LimitOffsetPagination
 from django.views.decorators.http import require_http_methods
@@ -79,7 +80,7 @@ class MyPagination(LimitOffsetPagination):
     #一页最多显示的个数
     max_limit = 10
 
-class CCFInfoList(generics.ListCreateAPIView):
+class CCFInfoList(generics.UpdateAPIView,generics.ListCreateAPIView):
     serializer_class = CCFInfoSerializer
     
     def list(self,request,type = None):
@@ -103,7 +104,6 @@ class CCFInfoList(generics.ListCreateAPIView):
             response["ret"] = 1
             response["msg"] = "success"
         elif type == "journal":
-            
             data_l = []
             for sub in sub_info:
                 sub_dict = {}
@@ -117,6 +117,27 @@ class CCFInfoList(generics.ListCreateAPIView):
             response["msg"] = "failed"
 
         return Response(response)
+
+    def update(self,request,*args,**kwargs):
+        ccf_name = self.request.query_params.get('name', None)
+        ccf_sname = self.request.query_params.get('sname', None)
+        if ccf_sname:
+            conf1 = CCFInfo.objects.filter(short_name=ccf_sname).first()
+        if ccf_sname:
+            conf2 = CCFInfo.objects.filter(full_name=ccf_name).first()
+        if conf1:
+            conf_ser = CCFInfoSerializer(conf1,data=request.data)
+        elif conf2:
+            conf_ser = CCFInfoSerializer(conf2,data=request.data)
+        else:
+            rep = {"status":0}
+            return Response(rep,status=status.HTTP_400_BAD_REQUEST)
+        if conf_ser.is_valid():
+            conf_ser.save()
+            return Response(conf_ser.data,status=status.HTTP_201_CREATED)
+        rep = {"status":0}
+        return Response(rep,status=status.HTTP_400_BAD_REQUEST)
+
 
 class CCFJournalInfo(APIView):
 
@@ -235,7 +256,6 @@ class ConferenceInfoDetail(APIView):
         """
         通过名称，简称，ID 获取会议信息
         """
-        # pdb.set_trace()
         con_name = self.request.query_params.get('con_name', None)
         con_sname = self.request.query_params.get('con_sname', None)
         con_id = self.request.query_params.get('id', None)
