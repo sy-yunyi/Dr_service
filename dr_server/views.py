@@ -53,8 +53,8 @@ def messageNotify(request,format=None):
             "short_message":'Hello',
             "message":'Hello world',
             "tip_title":"",
-            "tip_content";"欢迎使用Dr期刊会议助手，助您快速查找期刊信息，搜罗最新的会议信息。会议信息每天更新，若信息有误，可以通过关于页面的公众号或者意见反馈进行反馈。",
-            "tip_btn"：1
+            "tip_content":"欢迎使用Dr期刊会议助手，助您快速查找期刊信息，搜罗最新的会议信息。会议信息每天更新，若信息有误，可以通过关于页面的公众号或者意见反馈进行反馈。",
+            "tip_btn":1
         }
     })
 
