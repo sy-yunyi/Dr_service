@@ -329,9 +329,9 @@ class ConferenceHotList(APIView):
             confer_dict["shortName"] = conf.con_sname
             confer_dict["property"] = ["截稿日期："+str(conf.con_paper_deadline),"地点："+ str(conf.con_where)]
             dy=conf.con_delay if conf.con_delay!=" " else ""
-            if conf.con_rank1!=" " and conf.con_delay!=" ":
+            if conf.con_rank1!="" and conf.con_rank1!=" " and conf.con_delay!=" ":
                 confer_dict["rate"] = ["CCF: "+ str(conf.con_rank1),conf.con_delay]
-            elif conf.con_rank1!=" ":
+            elif conf.con_rank1!="" and conf.con_rank1!=" ":
                 confer_dict["rate"] =["CCF: "+ str(conf.con_rank1)]
             elif conf.con_delay!=" ":
                 confer_dict["rate"] =[conf.con_delay]
