@@ -208,7 +208,7 @@ class ConferenceList(APIView):
                 confer_dict["rate"] = ["CCF: "+ str(conf.con_rank1),conf.con_delay]
             elif conf.con_rank1!="" and conf.con_rank1!=" " and conf.con_rank1!="暂无":
                 confer_dict["rate"] =["CCF: "+ str(conf.con_rank1)]
-            elif conf.con_delay!=" ":
+            elif conf.con_delay!=" " and conf.con_delay!="":
                 confer_dict["rate"] =[conf.con_delay]
             else:
                 confer_dict["rate"] = []
